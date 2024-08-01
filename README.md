@@ -24,7 +24,6 @@ Then run `go generate`.
 `moxie` makes the following functions available at test time.
 
 ```
-(*T)._Func_Patch()                    -> patch Func, returning zero values.
 (*T)._Func_Return(...)                -> patch Func, returning a tuple.
 (*T)._Func_Returns(..._T_Func_Return) -> patch Func, returning a tuple sequence.
 (*T)._Func_Mock(mock func())          -> patch Func with custom behavior.

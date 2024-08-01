@@ -13,7 +13,7 @@ var _%[2]s = new(sync.Map)
 
 type _%[2]sData struct {
 	mutex sync.Mutex
-    once sync.Once
+	once sync.Once
 `
 
 // offsets
@@ -61,13 +61,13 @@ const fn = `func (_recv *%[1]s) %[2]s%[3]s {
 		panic("%[1]s.%[2]s: nil pointer receiver")
 	}
 	_ptr := uintptr(unsafe.Pointer(_recv))
-    var _val any
-    defer func() {
-        if _val != nil {
-	        _dat := _val.(*_%[1]sData)
-            _dat.once.Do(func() { runtime.SetFinalizer(_recv, func(_ *%[1]s) { _%[1]s.Delete(_ptr) })})
-        }
-    }()
+	var _val any
+	defer func() {
+		if _val != nil {
+			_dat := _val.(*_%[1]sData)
+			_dat.once.Do(func() { runtime.SetFinalizer(_recv, func(_ *%[1]s) { _%[1]s.Delete(_ptr) })})
+		}
+	}()
 	_val, _ = _%[1]s.LoadOrStore(_ptr, new(_%[1]sData))
 	_dat := _val.(*_%[1]sData)
 	_dat.mutex.Lock()
@@ -77,18 +77,6 @@ const fn = `func (_recv *%[1]s) %[2]s%[3]s {
 		return _dat.%[2]sMock(%[4]s)
 	}
 	return _recv.%[5]s.%[2]s(%[4]s)
-}
-
-func (_recv *%[1]s) _%[2]s_Patch() {
-	if _recv == nil {
-		panic("%[1]s.%[2]s: nil pointer receiver")
-	}
-	_ptr := uintptr(unsafe.Pointer(_recv))
-	_val, _ := _%[1]s.LoadOrStore(_ptr, new(_%[1]sData))
-	_dat := _val.(*_%[1]sData)
-	_dat.%[2]sMock = func(%[7]s) (%[8]s) {
-		return %[10]s
-	}
 }
 
 func (_recv *%[1]s) _%[2]s_Mock(mock func(%[7]s) (%[9]s)) {
@@ -120,16 +108,22 @@ func (_recv *%[1]s) _%[2]s_Returns(_rets ..._%[1]s_%[2]s_Return) {
 	_ptr := uintptr(unsafe.Pointer(_recv))
 	_val, _ := _%[1]s.LoadOrStore(_ptr, new(_%[1]sData))
 	_dat := _val.(*_%[1]sData)
-    var _count int
-	_dat.%[2]sMock = func(%[7]s) (%[9]s) {
-        defer func() { _count++ }()
-        var _ret _%[1]s_%[2]s_Return
-        if _count > len(_rets) {
-            _ret = _rets[len(_rets)-1]
-        } else {
-            _ret = _rets[_count]
-        }
-		return %[11]s
+	if len(_rets) > 0 {
+		var _count int
+		_dat.%[2]sMock = func(%[7]s) (%[9]s) {
+			defer func() { _count++ }()
+			var _ret _%[1]s_%[2]s_Return
+			if _count > len(_rets) {
+				_ret = _rets[len(_rets)-1]
+			} else {
+				_ret = _rets[_count]
+			}
+			return %[11]s
+		}
+	} else {
+		_dat.%[2]sMock = func(%[7]s) (%[8]s) {
+			return %[10]s
+		}
 	}
 }
 

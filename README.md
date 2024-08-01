@@ -24,10 +24,11 @@ Then run `go generate`.
 `moxie` makes the following functions available at test time.
 
 ```
-(*T)._Func_Patch()              -> patch Func, returning zero values.
-(*T)._Func_Return(r0, ...)      -> patch Func, returning specific values.
-(*T)._Func_Mock(mock func())    -> patch Func with custom behavior.
-(*T)._Func_Calls() []_Func_Call -> return calls to Func.
+(*T)._Func_Patch()                    -> patch Func, returning zero values.
+(*T)._Func_Return(r0, ...)            -> patch Func, returning a tuple.
+(*T)._Func_Returns(_Func_Return, ...) -> patch Func, returning a tuple sequence.
+(*T)._Func_Mock(mock func())          -> patch Func with custom behavior.
+(*T)._Func_Calls() []_Func_Call       -> return calls to Func.
 ```
 
 [embedding]: https://go.dev/doc/effective_go#embedding

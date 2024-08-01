@@ -30,9 +30,14 @@ const headerend = `}
 
 // 1: type
 // 2: method name
-// 3: structified signature
+// 3: structified parameters
+// 4: structified results
 const calltype = `type _%[1]s_%[2]sCall struct {
 %[3]s
+}
+
+type _%[1]s_%[2]sReturn struct {
+%[4]s
 }
 
 `
@@ -48,6 +53,7 @@ const calltype = `type _%[1]s_%[2]sCall struct {
 // 8: result parameters
 // 9: result types
 // 10: result arguments
+// 11: result from struct
 //
 //nolint:lll
 const fn = `func (_recv *%[1]s) %[2]s%[3]s {
@@ -104,6 +110,26 @@ func (_recv *%[1]s) _%[2]s_Return(%[8]s) {
 	_dat := _val.(*_%[1]sData)
 	_dat.%[2]sMock = func(%[7]s) (%[9]s) {
 		return %[10]s
+	}
+}
+
+func (_recv *%[1]s) _%[2]s_Returns(_rets ..._%[1]s_%[2]sReturn) {
+	if _recv == nil {
+		panic("%[1]s.%[2]s: nil pointer receiver")
+	}
+	_ptr := uintptr(unsafe.Pointer(_recv))
+	_val, _ := _%[1]s.LoadOrStore(_ptr, new(_%[1]sData))
+	_dat := _val.(*_%[1]sData)
+    var _count int
+	_dat.%[2]sMock = func(%[7]s) (%[9]s) {
+        defer func() { _count++ }()
+        var _ret _%[1]s_%[2]sReturn
+        if _count > len(_rets) {
+            _ret = _rets[len(_rets)-1]
+        } else {
+            _ret = _rets[_count]
+        }
+		return %[11]s
 	}
 }
 

@@ -129,7 +129,8 @@ func generate(typ types.Type) error {
 				calltype,
 				tname,
 				mname,
-				structify(tsig),
+				paramfields(tsig),
+				resultfields(tsig),
 			),
 		)
 	}
@@ -165,6 +166,7 @@ func generate(typ types.Type) error {
 				resultparams(tsig.Results()),
 				resulttypes(tsig.Results()),
 				resultargs(tsig.Results()),
+				resultstruct(tsig.Results(), "_ret"),
 			),
 		)
 	}
@@ -266,6 +268,23 @@ func resultargs(tup *types.Tuple) string {
 	return b.String()
 }
 
+func resultstruct(tup *types.Tuple, s string) string {
+	var b strings.Builder
+	for i := range tup.Len() {
+		v := tup.At(i)
+		if i > 0 {
+			b.WriteString(", ")
+		}
+		b.WriteString(s + ".")
+		if v.Name() == "" {
+			b.WriteString(fmt.Sprintf("r%d", i))
+		} else {
+			b.WriteString(v.Name())
+		}
+	}
+	return b.String()
+}
+
 func qualifier(pkg *types.Package) string {
 	if name, ok := imports[pkg.Path()]; ok {
 		return name
@@ -299,7 +318,7 @@ func importblock() string {
 	return b.String()
 }
 
-func structify(sig *types.Signature) string {
+func paramfields(sig *types.Signature) string {
 	var b strings.Builder
 	params := sig.Params()
 	for i := range params.Len() {
@@ -310,6 +329,25 @@ func structify(sig *types.Signature) string {
 		b.WriteString(fmt.Sprintf("\t%s %s", param.Name(),
 			types.TypeString(param.Type(), qualifier),
 		))
+	}
+	return b.String()
+}
+
+func resultfields(sig *types.Signature) string {
+	var b strings.Builder
+	results := sig.Results()
+	for i := range results.Len() {
+		if i > 0 {
+			b.WriteString("\n")
+		}
+		result := results.At(i)
+		b.WriteString("\t")
+		if result.Name() == "" {
+			b.WriteString(fmt.Sprintf("r%d", i))
+		} else {
+			b.WriteString(result.Name())
+		}
+		b.WriteString(" " + types.TypeString(result.Type(), qualifier))
 	}
 	return b.String()
 }

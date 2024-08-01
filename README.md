@@ -32,7 +32,7 @@ Then run `go generate`.
                                calling this with nil will un-mock the function.
 ```
 
-Mocks queue. For example, mocking with `(*T)_Func_Return` twice will return the
+Mocks queue. For example, mocking with `(*T)._Func_Return` twice will return the
 first set of values the next time the function is called, then return the second
 set of values in subsequent calls.
 
@@ -40,7 +40,6 @@ set of values in subsequent calls.
 
 ```
 (*T)._Func_Calls() []_T_Func_Call -> return calls to Func.
-
 ```
 
 [embedding]: https://go.dev/doc/effective_go#embedding

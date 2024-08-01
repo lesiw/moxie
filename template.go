@@ -20,24 +20,33 @@ type _%[2]sData struct {
 // 1: type
 // 2: method name
 // 3: method signature
-const funcinfo = `	%[2]sMock func%[3]s
+const funcinfo = `	%[2]sMocks []func%[3]s
 	%[2]sCalls []_%[1]s_%[2]s_Call
 `
 
+// offsets
+// 1: type
+//
+//nolint:lll
 const headerend = `}
+
+func _%[1]sPtrData(t *%[1]s) *_%[1]sData {
+	ptr := uintptr(unsafe.Pointer(t))
+	val, loaded := _%[1]s.LoadOrStore(ptr, new(_%[1]sData))
+	if !loaded {
+		val.(*_%[1]sData).once.Do(func() { runtime.SetFinalizer(t, func(_ *%[1]s) { _%[1]s.Delete(ptr) })})
+	}
+	return val.(*_%[1]sData)
+}
 
 `
 
+// offsets
 // 1: type
 // 2: method name
 // 3: structified parameters
-// 4: structified results
 const calltype = `type _%[1]s_%[2]s_Call struct {
 %[3]s
-}
-
-type _%[1]s_%[2]s_Return struct {
-%[4]s
 }
 
 `
@@ -53,89 +62,63 @@ type _%[1]s_%[2]s_Return struct {
 // 8: result parameters
 // 9: result types
 // 10: result arguments
-// 11: result from struct
 //
 //nolint:lll
 const fn = `func (_recv *%[1]s) %[2]s%[3]s {
 	if _recv == nil {
 		panic("%[1]s.%[2]s: nil pointer receiver")
 	}
-	_ptr := uintptr(unsafe.Pointer(_recv))
-	var _val any
-	defer func() {
-		if _val != nil {
-			_dat := _val.(*_%[1]sData)
-			_dat.once.Do(func() { runtime.SetFinalizer(_recv, func(_ *%[1]s) { _%[1]s.Delete(_ptr) })})
-		}
-	}()
-	_val, _ = _%[1]s.LoadOrStore(_ptr, new(_%[1]sData))
-	_dat := _val.(*_%[1]sData)
+	_dat := _%[1]sPtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.%[2]sCalls = append(_dat.%[2]sCalls, _%[1]s_%[2]s_Call{%[6]s})
-	_dat.mutex.Unlock()
-	if _dat.%[2]sMock != nil {
-		return _dat.%[2]sMock(%[4]s)
+	_fn := _recv.%[5]s.%[2]s
+	if len(_dat.%[2]sMocks) > 0 {
+		_fn = _dat.%[2]sMocks[0]
+		if len(_dat.%[2]sMocks) > 1 {
+			_dat.%[2]sMocks = _dat.%[2]sMocks[1:]
+		}
 	}
-	return _recv.%[5]s.%[2]s(%[4]s)
+	_dat.mutex.Unlock()
+	return _fn(%[4]s)
 }
 
-func (_recv *%[1]s) _%[2]s_Mock(mock func(%[7]s) (%[9]s)) {
+func (_recv *%[1]s) _%[2]s_Do(fn func(%[7]s) (%[9]s)) {
 	if _recv == nil {
 		panic("%[1]s.%[2]s: nil pointer receiver")
 	}
-	_ptr := uintptr(unsafe.Pointer(_recv))
-	_val, _ := _%[1]s.LoadOrStore(_ptr, new(_%[1]sData))
-	_dat := _val.(*_%[1]sData)
-	_dat.%[2]sMock = mock
+	_dat := _%[1]sPtrData(_recv)
+	defer _dat.mutex.Unlock()
+	_dat.mutex.Lock()
+	if fn == nil {
+		_dat.%[2]sMocks = []func(%[7]s) (%[9]s){}
+	} else if len(_dat.%[2]sMocks) < 2 {
+		_dat.%[2]sMocks = []func(%[7]s) (%[9]s){fn, fn}
+	} else {
+		_dat.%[2]sMocks = _dat.%[2]sMocks[:len(_dat.%[2]sMocks)-1]
+		_dat.%[2]sMocks = append(_dat.%[2]sMocks, fn)
+		_dat.%[2]sMocks = append(_dat.%[2]sMocks, fn)
+	}
+}
+
+func (_recv *%[1]s) _%[2]s_Stub() {
+	_recv._%[2]s_Do(func(%[7]s) (%[8]s) {
+		return %[10]s
+	})
 }
 
 func (_recv *%[1]s) _%[2]s_Return(%[8]s) {
-	if _recv == nil {
-		panic("%[1]s.%[2]s: nil pointer receiver")
-	}
-	_ptr := uintptr(unsafe.Pointer(_recv))
-	_val, _ := _%[1]s.LoadOrStore(_ptr, new(_%[1]sData))
-	_dat := _val.(*_%[1]sData)
-	_dat.%[2]sMock = func(%[7]s) (%[9]s) {
+	_recv._%[2]s_Do(func(%[7]s) (%[9]s) {
 		return %[10]s
-	}
-}
-
-func (_recv *%[1]s) _%[2]s_Returns(_rets ..._%[1]s_%[2]s_Return) {
-	if _recv == nil {
-		panic("%[1]s.%[2]s: nil pointer receiver")
-	}
-	_ptr := uintptr(unsafe.Pointer(_recv))
-	_val, _ := _%[1]s.LoadOrStore(_ptr, new(_%[1]sData))
-	_dat := _val.(*_%[1]sData)
-	if len(_rets) > 0 {
-		var _count int
-		_dat.%[2]sMock = func(%[7]s) (%[9]s) {
-			defer func() { _count++ }()
-			var _ret _%[1]s_%[2]s_Return
-			if _count > len(_rets) {
-				_ret = _rets[len(_rets)-1]
-			} else {
-				_ret = _rets[_count]
-			}
-			return %[11]s
-		}
-	} else {
-		_dat.%[2]sMock = func(%[7]s) (%[8]s) {
-			return %[10]s
-		}
-	}
+	})
 }
 
 func (_recv *%[1]s) _%[2]s_Calls() []_%[1]s_%[2]s_Call {
 	if _recv == nil {
 		panic("%[1]s.%[2]s: nil pointer receiver")
 	}
-	_ptr := uintptr(unsafe.Pointer(_recv))
-	_val, _ := _%[1]s.LoadOrStore(_ptr, new(_%[1]sData))
-	_dat := _val.(*_%[1]sData)
-	_dat.mutex.Lock()
+	_dat := _%[1]sPtrData(_recv)
 	defer _dat.mutex.Unlock()
+	_dat.mutex.Lock()
 	return _dat.%[2]sCalls
 }
 

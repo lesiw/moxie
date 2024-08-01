@@ -21,7 +21,7 @@ type _%[2]sData struct {
 // 2: method name
 // 3: method signature
 const funcinfo = `	%[2]sMock func%[3]s
-	%[2]sCalls []_%[1]s_%[2]sCall
+	%[2]sCalls []_%[1]s_%[2]s_Call
 `
 
 const headerend = `}
@@ -32,11 +32,11 @@ const headerend = `}
 // 2: method name
 // 3: structified parameters
 // 4: structified results
-const calltype = `type _%[1]s_%[2]sCall struct {
+const calltype = `type _%[1]s_%[2]s_Call struct {
 %[3]s
 }
 
-type _%[1]s_%[2]sReturn struct {
+type _%[1]s_%[2]s_Return struct {
 %[4]s
 }
 
@@ -71,7 +71,7 @@ const fn = `func (_recv *%[1]s) %[2]s%[3]s {
 	_val, _ = _%[1]s.LoadOrStore(_ptr, new(_%[1]sData))
 	_dat := _val.(*_%[1]sData)
 	_dat.mutex.Lock()
-	_dat.%[2]sCalls = append(_dat.%[2]sCalls, _%[1]s_%[2]sCall{%[6]s})
+	_dat.%[2]sCalls = append(_dat.%[2]sCalls, _%[1]s_%[2]s_Call{%[6]s})
 	_dat.mutex.Unlock()
 	if _dat.%[2]sMock != nil {
 		return _dat.%[2]sMock(%[4]s)
@@ -113,7 +113,7 @@ func (_recv *%[1]s) _%[2]s_Return(%[8]s) {
 	}
 }
 
-func (_recv *%[1]s) _%[2]s_Returns(_rets ..._%[1]s_%[2]sReturn) {
+func (_recv *%[1]s) _%[2]s_Returns(_rets ..._%[1]s_%[2]s_Return) {
 	if _recv == nil {
 		panic("%[1]s.%[2]s: nil pointer receiver")
 	}
@@ -123,7 +123,7 @@ func (_recv *%[1]s) _%[2]s_Returns(_rets ..._%[1]s_%[2]sReturn) {
     var _count int
 	_dat.%[2]sMock = func(%[7]s) (%[9]s) {
         defer func() { _count++ }()
-        var _ret _%[1]s_%[2]sReturn
+        var _ret _%[1]s_%[2]s_Return
         if _count > len(_rets) {
             _ret = _rets[len(_rets)-1]
         } else {
@@ -133,7 +133,7 @@ func (_recv *%[1]s) _%[2]s_Returns(_rets ..._%[1]s_%[2]sReturn) {
 	}
 }
 
-func (_recv *%[1]s) _%[2]s_Calls() []_%[1]s_%[2]sCall {
+func (_recv *%[1]s) _%[2]s_Calls() []_%[1]s_%[2]s_Call {
 	if _recv == nil {
 		panic("%[1]s.%[2]s: nil pointer receiver")
 	}

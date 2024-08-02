@@ -231,6 +231,9 @@ func resultparams(tup *types.Tuple) string {
 		}
 		if v.Name() == "" {
 			b.WriteString(fmt.Sprintf("r%d", i))
+		} else if v.Name() == "error" {
+			// Fix a common type shadowing error.
+			b.WriteString("err")
 		} else {
 			b.WriteString(v.Name())
 		}
@@ -260,6 +263,9 @@ func resultargs(tup *types.Tuple) string {
 		}
 		if v.Name() == "" {
 			b.WriteString(fmt.Sprintf("r%d", i))
+		} else if v.Name() == "error" {
+			// Fix a common type shadowing error.
+			b.WriteString("err")
 		} else {
 			b.WriteString(v.Name())
 		}

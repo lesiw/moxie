@@ -62,6 +62,7 @@ const calltype = `type _%[1]s_%[2]s_Call struct {
 // 8: result parameters
 // 9: result types
 // 10: result arguments
+// 11: "return " if method has return values
 //
 //nolint:lll
 const fn = `func (_recv *%[1]s) %[2]s%[3]s {
@@ -79,7 +80,7 @@ const fn = `func (_recv *%[1]s) %[2]s%[3]s {
 		}
 	}
 	_dat.mutex.Unlock()
-	return _fn(%[4]s)
+	%[11]s_fn(%[4]s)
 }
 
 func (_recv *%[1]s) _%[2]s_Do(fn func(%[7]s) (%[9]s)) {

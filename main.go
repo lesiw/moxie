@@ -165,6 +165,7 @@ func generate(typ types.Type) error {
 				resultparams(tsig.Results()),
 				resulttypes(tsig.Results()),
 				resultargs(tsig.Results()),
+				ternary(tsig.Results().Len() > 0, "return ", ""),
 			),
 		)
 	}
@@ -312,4 +313,12 @@ func paramfields(sig *types.Signature) string {
 		))
 	}
 	return b.String()
+}
+
+func ternary[T any](cond bool, t T, f T) T {
+	if cond {
+		return t
+	} else {
+		return f
+	}
 }

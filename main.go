@@ -1,11 +1,13 @@
 package main
 
 import (
+	"cmp"
 	_ "embed"
 	"errors"
 	"fmt"
 	"go/types"
 	"os"
+	"slices"
 	"strings"
 	"unicode"
 
@@ -295,7 +297,8 @@ pickname:
 func importblock() string {
 	var b strings.Builder
 	b.WriteString("import (\n")
-	for path, name := range imports {
+	for _, path := range keys(imports) {
+		name := imports[path]
 		if name == "" {
 			continue
 		}
@@ -327,4 +330,13 @@ func ternary[T any](cond bool, t T, f T) T {
 	} else {
 		return f
 	}
+}
+
+func keys[M ~map[K]V, K cmp.Ordered, V any](m M) []K {
+	r := make([]K, 0, len(m))
+	for k := range m {
+		r = append(r, k)
+	}
+	slices.Sort(r)
+	return r
 }

@@ -9,7 +9,7 @@ import (
 )
 
 func TestMoxie(t *testing.T) {
-	if err := os.Chdir("testdata/"); err != nil {
+	if err := os.Chdir("internal/testdata/"); err != nil {
 		t.Fatalf("failed to change directory: %s", err)
 	}
 	matches, err := filepath.Glob("mock_*.go")

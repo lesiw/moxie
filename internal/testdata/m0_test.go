@@ -6,7 +6,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"lesiw.io/moxie/testdata/pkg"
+	"lesiw.io/moxie/internal/testdata/pkg"
 )
 
 func TestNoMock(t *testing.T) {

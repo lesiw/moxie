@@ -3,7 +3,7 @@
 package testdata
 
 import (
-	pkg "lesiw.io/moxie/testdata/pkg"
+	pkg "lesiw.io/moxie/internal/testdata/pkg"
 	runtime "runtime"
 	sync "sync"
 	unsafe "unsafe"

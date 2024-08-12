@@ -24,7 +24,7 @@ func TestMoxie(t *testing.T) {
 	if err := run("M0"); err != nil {
 		t.Fatalf("failed to run moxie: %s", err)
 	}
-	if err := sys.Run("go", "test", "."); err != nil {
+	if err := sys.Run("go", "test", "-v", "-shuffle", "on", "."); err != nil {
 		t.Fatalf("failed to run tests: %s", err)
 	}
 }

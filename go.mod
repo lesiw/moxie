@@ -4,6 +4,7 @@ go 1.22.5
 
 require (
 	golang.org/x/tools v0.23.0
+	lesiw.io/cmdio v0.0.0-20240811224450-823cd2a17758
 	lesiw.io/flag v0.7.0
 )
 

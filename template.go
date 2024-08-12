@@ -45,10 +45,7 @@ func _%[1]sPtrData(t *%[1]s) *_%[1]sData {
 // 1: type
 // 2: method name
 // 3: structified parameters
-const calltype = `type _%[1]s_%[2]s_Call struct {
-%[3]s
-}
-
+const calltype = `type _%[1]s_%[2]s_Call struct {%[3]s}
 `
 
 // offsets
@@ -65,7 +62,8 @@ const calltype = `type _%[1]s_%[2]s_Call struct {
 // 11: "return " if method has return values
 //
 //nolint:lll
-const fn = `func (_recv *%[1]s) %[2]s%[3]s {
+const fn = `
+func (_recv *%[1]s) %[3]s {
 	if _recv == nil {
 		panic("%[1]s.%[2]s: nil pointer receiver")
 	}
@@ -122,5 +120,4 @@ func (_recv *%[1]s) _%[2]s_Calls() []_%[1]s_%[2]s_Call {
 	_dat.mutex.Lock()
 	return _dat.%[2]sCalls
 }
-
 `

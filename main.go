@@ -35,7 +35,7 @@ func main() {
 	var code int
 	defer func() { os.Exit(code) }()
 
-	if err := run(); err != nil {
+	if err := run(os.Args[1:]...); err != nil {
 		if err.Error() != "" {
 			fmt.Fprintln(os.Stderr, err)
 		}
@@ -43,8 +43,8 @@ func main() {
 	}
 }
 
-func run() error {
-	if err := flags.Parse(os.Args[1:]...); err != nil {
+func run(args ...string) error {
+	if err := flags.Parse(args...); err != nil {
 		return errors.New("")
 	}
 	if *printver {
@@ -147,19 +147,14 @@ func generate(typ types.Type) error {
 			func(p *types.Package) string { return "" },
 		)
 		origin = strings.TrimLeft(origin, "*")
-		sig := types.SelectionString(sel, qualifier)
-		for range 2 {
-			_, sig, _ = strings.Cut(sig, " ") // Discard field.
-		}
-		mname, sig, _ := strings.Cut(sig, "(")
-		sig = "(" + sig
 		tsig := sel.Obj().Type().(*types.Signature)
+		mname := sel.Obj().Name()
 		out.WriteString(
 			fmt.Sprintf(
 				fn,
 				tname,
 				mname,
-				sig,
+				sig(sel),
 				args(tsig.Params(), tsig.Variadic()),
 				origin,
 				args(tsig.Params(), false),
@@ -192,6 +187,45 @@ func snakecase(s string) string {
 	return result.String()
 }
 
+func sig(sel *types.Selection) string {
+	var b strings.Builder
+	b.WriteString(sel.Obj().Name())
+	sig := sel.Obj().Type().(*types.Signature)
+	b.WriteString("(")
+	for i := range sig.Params().Len() {
+		p := sig.Params().At(i)
+		if i > 0 {
+			b.WriteString(", ")
+		}
+		b.WriteString(cmp.Or(p.Name(), fmt.Sprintf("p%d", i)))
+		b.WriteString(" ")
+		if i == sig.Params().Len()-1 && sig.Variadic() {
+			b.WriteString("...")
+			b.WriteString(p.Type().String()[2:])
+		} else {
+			b.WriteString(p.Type().String())
+		}
+	}
+	b.WriteString(")")
+	if sig.Results().Len() > 0 {
+		b.WriteString(" ")
+		if sig.Results().Len() > 1 {
+			b.WriteString("(")
+		}
+		for i := range sig.Results().Len() {
+			r := sig.Results().At(i)
+			if i > 0 {
+				b.WriteString(", ")
+			}
+			b.WriteString(r.Type().String())
+		}
+		if sig.Results().Len() > 1 {
+			b.WriteString(")")
+		}
+	}
+	return b.String()
+}
+
 func args(tup *types.Tuple, variadic bool) string {
 	var b strings.Builder
 	for i := range tup.Len() {
@@ -199,7 +233,7 @@ func args(tup *types.Tuple, variadic bool) string {
 		if i > 0 {
 			b.WriteString(", ")
 		}
-		b.WriteString(v.Name())
+		b.WriteString(cmp.Or(v.Name(), fmt.Sprintf("p%d", i)))
 		if i == tup.Len()-1 && variadic {
 			b.WriteString("...")
 		}
@@ -310,21 +344,27 @@ func importblock() string {
 }
 
 func paramfields(sig *types.Signature) string {
-	var b strings.Builder
 	params := sig.Params()
+	if params.Len() == 0 {
+		return ""
+	}
+	var b strings.Builder
+	b.WriteString("\n")
 	for i := range params.Len() {
 		if i > 0 {
 			b.WriteString("\n")
 		}
 		param := params.At(i)
-		b.WriteString(fmt.Sprintf("\t%s %s", param.Name(),
+		b.WriteString(fmt.Sprintf("\t%s %s",
+			cmp.Or(param.Name(), fmt.Sprintf("p%d", i)),
 			types.TypeString(param.Type(), qualifier),
 		))
 	}
+	b.WriteString("\n")
 	return b.String()
 }
 
-func ternary[T any](cond bool, t T, f T) T {
+func ternary[T any](cond bool, t, f T) T {
 	if cond {
 		return t
 	} else {

@@ -201,9 +201,9 @@ func sig(sel *types.Selection) string {
 		b.WriteString(" ")
 		if i == sig.Params().Len()-1 && sig.Variadic() {
 			b.WriteString("...")
-			b.WriteString(p.Type().String()[2:])
+			b.WriteString(types.TypeString(p.Type(), qualifier)[2:])
 		} else {
-			b.WriteString(p.Type().String())
+			b.WriteString(types.TypeString(p.Type(), qualifier))
 		}
 	}
 	b.WriteString(")")
@@ -217,7 +217,7 @@ func sig(sel *types.Selection) string {
 			if i > 0 {
 				b.WriteString(", ")
 			}
-			b.WriteString(r.Type().String())
+			b.WriteString(types.TypeString(r.Type(), qualifier))
 		}
 		if sig.Results().Len() > 1 {
 			b.WriteString(")")

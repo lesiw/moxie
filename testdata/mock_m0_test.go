@@ -3,6 +3,7 @@
 package testdata
 
 import (
+	pkg "lesiw.io/moxie/testdata/pkg"
 	runtime "runtime"
 	sync "sync"
 	unsafe "unsafe"
@@ -13,53 +14,53 @@ var _M0 = new(sync.Map)
 type _M0Data struct {
 	mutex sync.Mutex
 	once sync.Once
-	AllNamedIdentifiersMocks []func(x string, y ...string) (n int, err error)
+	AllNamedIdentifiersMocks []func(x pkg.String, y ...pkg.String) (n pkg.Int, err error)
 	AllNamedIdentifiersCalls []_M0_AllNamedIdentifiers_Call
-	MixedNoResultMocks []func(string, ...string)
+	MixedNoResultMocks []func(pkg.String, ...pkg.String)
 	MixedNoResultCalls []_M0_MixedNoResult_Call
-	MixedOneResultMocks []func(string, ...string) error
+	MixedOneResultMocks []func(pkg.String, ...pkg.String) error
 	MixedOneResultCalls []_M0_MixedOneResult_Call
-	MixedTwoResultsMocks []func(string, ...string) (int, error)
+	MixedTwoResultsMocks []func(pkg.String, ...pkg.String) (pkg.Int, error)
 	MixedTwoResultsCalls []_M0_MixedTwoResults_Call
-	NamedMixedNoResultMocks []func(x string, y ...string)
+	NamedMixedNoResultMocks []func(x pkg.String, y ...pkg.String)
 	NamedMixedNoResultCalls []_M0_NamedMixedNoResult_Call
-	NamedMixedOneResultMocks []func(x string, y ...string) error
+	NamedMixedOneResultMocks []func(x pkg.String, y ...pkg.String) error
 	NamedMixedOneResultCalls []_M0_NamedMixedOneResult_Call
-	NamedMixedTwoResultsMocks []func(x string, y ...string) (int, error)
+	NamedMixedTwoResultsMocks []func(x pkg.String, y ...pkg.String) (pkg.Int, error)
 	NamedMixedTwoResultsCalls []_M0_NamedMixedTwoResults_Call
-	NamedParamNoResultMocks []func(x string)
+	NamedParamNoResultMocks []func(x pkg.String)
 	NamedParamNoResultCalls []_M0_NamedParamNoResult_Call
-	NamedParamOneResultMocks []func(x string) error
+	NamedParamOneResultMocks []func(x pkg.String) error
 	NamedParamOneResultCalls []_M0_NamedParamOneResult_Call
-	NamedParamTwoResultsMocks []func(x string) (int, error)
+	NamedParamTwoResultsMocks []func(x pkg.String) (pkg.Int, error)
 	NamedParamTwoResultsCalls []_M0_NamedParamTwoResults_Call
 	OneNamedResultMocks []func() (err error)
 	OneNamedResultCalls []_M0_OneNamedResult_Call
-	OneParamNoResultMocks []func(string)
+	OneParamNoResultMocks []func(pkg.String)
 	OneParamNoResultCalls []_M0_OneParamNoResult_Call
-	OneParamOneResultMocks []func(string) error
+	OneParamOneResultMocks []func(pkg.String) error
 	OneParamOneResultCalls []_M0_OneParamOneResult_Call
-	OneParamTwoResultsMocks []func(string) (int, error)
+	OneParamTwoResultsMocks []func(pkg.String) (pkg.Int, error)
 	OneParamTwoResultsCalls []_M0_OneParamTwoResults_Call
 	OneResultMocks []func() error
 	OneResultCalls []_M0_OneResult_Call
 	SimpleMocks []func()
 	SimpleCalls []_M0_Simple_Call
-	TwoNamedResultsMocks []func() (n int, err error)
+	TwoNamedResultsMocks []func() (n pkg.Int, err error)
 	TwoNamedResultsCalls []_M0_TwoNamedResults_Call
-	TwoParamsNoResultMocks []func(string, string)
+	TwoParamsNoResultMocks []func(pkg.String, pkg.String)
 	TwoParamsNoResultCalls []_M0_TwoParamsNoResult_Call
-	TwoParamsOneResultMocks []func(string, string) error
+	TwoParamsOneResultMocks []func(pkg.String, pkg.String) error
 	TwoParamsOneResultCalls []_M0_TwoParamsOneResult_Call
-	TwoParamsTwoResultsMocks []func(string, string) (int, error)
+	TwoParamsTwoResultsMocks []func(pkg.String, pkg.String) (pkg.Int, error)
 	TwoParamsTwoResultsCalls []_M0_TwoParamsTwoResults_Call
-	TwoResultsMocks []func() (int, error)
+	TwoResultsMocks []func() (pkg.Int, error)
 	TwoResultsCalls []_M0_TwoResults_Call
-	VariadicNoResultMocks []func(...string)
+	VariadicNoResultMocks []func(...pkg.String)
 	VariadicNoResultCalls []_M0_VariadicNoResult_Call
-	VariadicOneResultMocks []func(...string) error
+	VariadicOneResultMocks []func(...pkg.String) error
 	VariadicOneResultCalls []_M0_VariadicOneResult_Call
-	VariadicTwoResultsMocks []func(...string) (int, error)
+	VariadicTwoResultsMocks []func(...pkg.String) (pkg.Int, error)
 	VariadicTwoResultsCalls []_M0_VariadicTwoResults_Call
 }
 
@@ -73,79 +74,79 @@ func _M0PtrData(t *M0) *_M0Data {
 }
 
 type _M0_AllNamedIdentifiers_Call struct {
-	x string
-	y []string
+	x pkg.String
+	y []pkg.String
 }
 type _M0_MixedNoResult_Call struct {
-	p0 string
-	p1 []string
+	p0 pkg.String
+	p1 []pkg.String
 }
 type _M0_MixedOneResult_Call struct {
-	p0 string
-	p1 []string
+	p0 pkg.String
+	p1 []pkg.String
 }
 type _M0_MixedTwoResults_Call struct {
-	p0 string
-	p1 []string
+	p0 pkg.String
+	p1 []pkg.String
 }
 type _M0_NamedMixedNoResult_Call struct {
-	x string
-	y []string
+	x pkg.String
+	y []pkg.String
 }
 type _M0_NamedMixedOneResult_Call struct {
-	x string
-	y []string
+	x pkg.String
+	y []pkg.String
 }
 type _M0_NamedMixedTwoResults_Call struct {
-	x string
-	y []string
+	x pkg.String
+	y []pkg.String
 }
 type _M0_NamedParamNoResult_Call struct {
-	x string
+	x pkg.String
 }
 type _M0_NamedParamOneResult_Call struct {
-	x string
+	x pkg.String
 }
 type _M0_NamedParamTwoResults_Call struct {
-	x string
+	x pkg.String
 }
 type _M0_OneNamedResult_Call struct {}
 type _M0_OneParamNoResult_Call struct {
-	p0 string
+	p0 pkg.String
 }
 type _M0_OneParamOneResult_Call struct {
-	p0 string
+	p0 pkg.String
 }
 type _M0_OneParamTwoResults_Call struct {
-	p0 string
+	p0 pkg.String
 }
 type _M0_OneResult_Call struct {}
 type _M0_Simple_Call struct {}
 type _M0_TwoNamedResults_Call struct {}
 type _M0_TwoParamsNoResult_Call struct {
-	p0 string
-	p1 string
+	p0 pkg.String
+	p1 pkg.String
 }
 type _M0_TwoParamsOneResult_Call struct {
-	p0 string
-	p1 string
+	p0 pkg.String
+	p1 pkg.String
 }
 type _M0_TwoParamsTwoResults_Call struct {
-	p0 string
-	p1 string
+	p0 pkg.String
+	p1 pkg.String
 }
 type _M0_TwoResults_Call struct {}
 type _M0_VariadicNoResult_Call struct {
-	p0 []string
+	p0 []pkg.String
 }
 type _M0_VariadicOneResult_Call struct {
-	p0 []string
+	p0 []pkg.String
 }
 type _M0_VariadicTwoResults_Call struct {
-	p0 []string
+	p0 []pkg.String
 }
 
-func (_recv *M0) AllNamedIdentifiers(x string, y ...string) (int, error) {
+func (_recv *M0) AllNamedIdentifiers(x pkg.String, y ...pkg.String) (pkg.Int, error) {
 	if _recv == nil {
 		panic("M0.AllNamedIdentifiers: nil pointer receiver")
 	}
@@ -163,7 +164,7 @@ func (_recv *M0) AllNamedIdentifiers(x string, y ...string) (int, error) {
 	return _fn(x, y...)
 }
 
-func (_recv *M0) _AllNamedIdentifiers_Do(fn func(string, ...string) (int, error)) {
+func (_recv *M0) _AllNamedIdentifiers_Do(fn func(pkg.String, ...pkg.String) (pkg.Int, error)) {
 	if _recv == nil {
 		panic("M0.AllNamedIdentifiers: nil pointer receiver")
 	}
@@ -171,9 +172,9 @@ func (_recv *M0) _AllNamedIdentifiers_Do(fn func(string, ...string) (int, error)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.AllNamedIdentifiersMocks = []func(string, ...string) (int, error){}
+		_dat.AllNamedIdentifiersMocks = []func(pkg.String, ...pkg.String) (pkg.Int, error){}
 	} else if len(_dat.AllNamedIdentifiersMocks) < 2 {
-		_dat.AllNamedIdentifiersMocks = []func(string, ...string) (int, error){fn, fn}
+		_dat.AllNamedIdentifiersMocks = []func(pkg.String, ...pkg.String) (pkg.Int, error){fn, fn}
 	} else {
 		_dat.AllNamedIdentifiersMocks = _dat.AllNamedIdentifiersMocks[:len(_dat.AllNamedIdentifiersMocks)-1]
 		_dat.AllNamedIdentifiersMocks = append(_dat.AllNamedIdentifiersMocks, fn)
@@ -182,13 +183,13 @@ func (_recv *M0) _AllNamedIdentifiers_Do(fn func(string, ...string) (int, error)
 }
 
 func (_recv *M0) _AllNamedIdentifiers_Stub() {
-	_recv._AllNamedIdentifiers_Do(func(string, ...string) (n int, err error) {
+	_recv._AllNamedIdentifiers_Do(func(pkg.String, ...pkg.String) (n pkg.Int, err error) {
 		return n, err
 	})
 }
 
-func (_recv *M0) _AllNamedIdentifiers_Return(n int, err error) {
-	_recv._AllNamedIdentifiers_Do(func(string, ...string) (int, error) {
+func (_recv *M0) _AllNamedIdentifiers_Return(n pkg.Int, err error) {
+	_recv._AllNamedIdentifiers_Do(func(pkg.String, ...pkg.String) (pkg.Int, error) {
 		return n, err
 	})
 }
@@ -203,7 +204,7 @@ func (_recv *M0) _AllNamedIdentifiers_Calls() []_M0_AllNamedIdentifiers_Call {
 	return _dat.AllNamedIdentifiersCalls
 }
 
-func (_recv *M0) MixedNoResult(p0 string, p1 ...string) {
+func (_recv *M0) MixedNoResult(p0 pkg.String, p1 ...pkg.String) {
 	if _recv == nil {
 		panic("M0.MixedNoResult: nil pointer receiver")
 	}
@@ -221,7 +222,7 @@ func (_recv *M0) MixedNoResult(p0 string, p1 ...string) {
 	_fn(p0, p1...)
 }
 
-func (_recv *M0) _MixedNoResult_Do(fn func(string, ...string) ()) {
+func (_recv *M0) _MixedNoResult_Do(fn func(pkg.String, ...pkg.String) ()) {
 	if _recv == nil {
 		panic("M0.MixedNoResult: nil pointer receiver")
 	}
@@ -229,9 +230,9 @@ func (_recv *M0) _MixedNoResult_Do(fn func(string, ...string) ()) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.MixedNoResultMocks = []func(string, ...string) (){}
+		_dat.MixedNoResultMocks = []func(pkg.String, ...pkg.String) (){}
 	} else if len(_dat.MixedNoResultMocks) < 2 {
-		_dat.MixedNoResultMocks = []func(string, ...string) (){fn, fn}
+		_dat.MixedNoResultMocks = []func(pkg.String, ...pkg.String) (){fn, fn}
 	} else {
 		_dat.MixedNoResultMocks = _dat.MixedNoResultMocks[:len(_dat.MixedNoResultMocks)-1]
 		_dat.MixedNoResultMocks = append(_dat.MixedNoResultMocks, fn)
@@ -240,13 +241,13 @@ func (_recv *M0) _MixedNoResult_Do(fn func(string, ...string) ()) {
 }
 
 func (_recv *M0) _MixedNoResult_Stub() {
-	_recv._MixedNoResult_Do(func(string, ...string) () {
+	_recv._MixedNoResult_Do(func(pkg.String, ...pkg.String) () {
 		return 
 	})
 }
 
 func (_recv *M0) _MixedNoResult_Return() {
-	_recv._MixedNoResult_Do(func(string, ...string) () {
+	_recv._MixedNoResult_Do(func(pkg.String, ...pkg.String) () {
 		return 
 	})
 }
@@ -261,7 +262,7 @@ func (_recv *M0) _MixedNoResult_Calls() []_M0_MixedNoResult_Call {
 	return _dat.MixedNoResultCalls
 }
 
-func (_recv *M0) MixedOneResult(p0 string, p1 ...string) error {
+func (_recv *M0) MixedOneResult(p0 pkg.String, p1 ...pkg.String) error {
 	if _recv == nil {
 		panic("M0.MixedOneResult: nil pointer receiver")
 	}
@@ -279,7 +280,7 @@ func (_recv *M0) MixedOneResult(p0 string, p1 ...string) error {
 	return _fn(p0, p1...)
 }
 
-func (_recv *M0) _MixedOneResult_Do(fn func(string, ...string) (error)) {
+func (_recv *M0) _MixedOneResult_Do(fn func(pkg.String, ...pkg.String) (error)) {
 	if _recv == nil {
 		panic("M0.MixedOneResult: nil pointer receiver")
 	}
@@ -287,9 +288,9 @@ func (_recv *M0) _MixedOneResult_Do(fn func(string, ...string) (error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.MixedOneResultMocks = []func(string, ...string) (error){}
+		_dat.MixedOneResultMocks = []func(pkg.String, ...pkg.String) (error){}
 	} else if len(_dat.MixedOneResultMocks) < 2 {
-		_dat.MixedOneResultMocks = []func(string, ...string) (error){fn, fn}
+		_dat.MixedOneResultMocks = []func(pkg.String, ...pkg.String) (error){fn, fn}
 	} else {
 		_dat.MixedOneResultMocks = _dat.MixedOneResultMocks[:len(_dat.MixedOneResultMocks)-1]
 		_dat.MixedOneResultMocks = append(_dat.MixedOneResultMocks, fn)
@@ -298,13 +299,13 @@ func (_recv *M0) _MixedOneResult_Do(fn func(string, ...string) (error)) {
 }
 
 func (_recv *M0) _MixedOneResult_Stub() {
-	_recv._MixedOneResult_Do(func(string, ...string) (r0 error) {
+	_recv._MixedOneResult_Do(func(pkg.String, ...pkg.String) (r0 error) {
 		return r0
 	})
 }
 
 func (_recv *M0) _MixedOneResult_Return(r0 error) {
-	_recv._MixedOneResult_Do(func(string, ...string) (error) {
+	_recv._MixedOneResult_Do(func(pkg.String, ...pkg.String) (error) {
 		return r0
 	})
 }
@@ -319,7 +320,7 @@ func (_recv *M0) _MixedOneResult_Calls() []_M0_MixedOneResult_Call {
 	return _dat.MixedOneResultCalls
 }
 
-func (_recv *M0) MixedTwoResults(p0 string, p1 ...string) (int, error) {
+func (_recv *M0) MixedTwoResults(p0 pkg.String, p1 ...pkg.String) (pkg.Int, error) {
 	if _recv == nil {
 		panic("M0.MixedTwoResults: nil pointer receiver")
 	}
@@ -337,7 +338,7 @@ func (_recv *M0) MixedTwoResults(p0 string, p1 ...string) (int, error) {
 	return _fn(p0, p1...)
 }
 
-func (_recv *M0) _MixedTwoResults_Do(fn func(string, ...string) (int, error)) {
+func (_recv *M0) _MixedTwoResults_Do(fn func(pkg.String, ...pkg.String) (pkg.Int, error)) {
 	if _recv == nil {
 		panic("M0.MixedTwoResults: nil pointer receiver")
 	}
@@ -345,9 +346,9 @@ func (_recv *M0) _MixedTwoResults_Do(fn func(string, ...string) (int, error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.MixedTwoResultsMocks = []func(string, ...string) (int, error){}
+		_dat.MixedTwoResultsMocks = []func(pkg.String, ...pkg.String) (pkg.Int, error){}
 	} else if len(_dat.MixedTwoResultsMocks) < 2 {
-		_dat.MixedTwoResultsMocks = []func(string, ...string) (int, error){fn, fn}
+		_dat.MixedTwoResultsMocks = []func(pkg.String, ...pkg.String) (pkg.Int, error){fn, fn}
 	} else {
 		_dat.MixedTwoResultsMocks = _dat.MixedTwoResultsMocks[:len(_dat.MixedTwoResultsMocks)-1]
 		_dat.MixedTwoResultsMocks = append(_dat.MixedTwoResultsMocks, fn)
@@ -356,13 +357,13 @@ func (_recv *M0) _MixedTwoResults_Do(fn func(string, ...string) (int, error)) {
 }
 
 func (_recv *M0) _MixedTwoResults_Stub() {
-	_recv._MixedTwoResults_Do(func(string, ...string) (r0 int, r1 error) {
+	_recv._MixedTwoResults_Do(func(pkg.String, ...pkg.String) (r0 pkg.Int, r1 error) {
 		return r0, r1
 	})
 }
 
-func (_recv *M0) _MixedTwoResults_Return(r0 int, r1 error) {
-	_recv._MixedTwoResults_Do(func(string, ...string) (int, error) {
+func (_recv *M0) _MixedTwoResults_Return(r0 pkg.Int, r1 error) {
+	_recv._MixedTwoResults_Do(func(pkg.String, ...pkg.String) (pkg.Int, error) {
 		return r0, r1
 	})
 }
@@ -377,7 +378,7 @@ func (_recv *M0) _MixedTwoResults_Calls() []_M0_MixedTwoResults_Call {
 	return _dat.MixedTwoResultsCalls
 }
 
-func (_recv *M0) NamedMixedNoResult(x string, y ...string) {
+func (_recv *M0) NamedMixedNoResult(x pkg.String, y ...pkg.String) {
 	if _recv == nil {
 		panic("M0.NamedMixedNoResult: nil pointer receiver")
 	}
@@ -395,7 +396,7 @@ func (_recv *M0) NamedMixedNoResult(x string, y ...string) {
 	_fn(x, y...)
 }
 
-func (_recv *M0) _NamedMixedNoResult_Do(fn func(string, ...string) ()) {
+func (_recv *M0) _NamedMixedNoResult_Do(fn func(pkg.String, ...pkg.String) ()) {
 	if _recv == nil {
 		panic("M0.NamedMixedNoResult: nil pointer receiver")
 	}
@@ -403,9 +404,9 @@ func (_recv *M0) _NamedMixedNoResult_Do(fn func(string, ...string) ()) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.NamedMixedNoResultMocks = []func(string, ...string) (){}
+		_dat.NamedMixedNoResultMocks = []func(pkg.String, ...pkg.String) (){}
 	} else if len(_dat.NamedMixedNoResultMocks) < 2 {
-		_dat.NamedMixedNoResultMocks = []func(string, ...string) (){fn, fn}
+		_dat.NamedMixedNoResultMocks = []func(pkg.String, ...pkg.String) (){fn, fn}
 	} else {
 		_dat.NamedMixedNoResultMocks = _dat.NamedMixedNoResultMocks[:len(_dat.NamedMixedNoResultMocks)-1]
 		_dat.NamedMixedNoResultMocks = append(_dat.NamedMixedNoResultMocks, fn)
@@ -414,13 +415,13 @@ func (_recv *M0) _NamedMixedNoResult_Do(fn func(string, ...string) ()) {
 }
 
 func (_recv *M0) _NamedMixedNoResult_Stub() {
-	_recv._NamedMixedNoResult_Do(func(string, ...string) () {
+	_recv._NamedMixedNoResult_Do(func(pkg.String, ...pkg.String) () {
 		return 
 	})
 }
 
 func (_recv *M0) _NamedMixedNoResult_Return() {
-	_recv._NamedMixedNoResult_Do(func(string, ...string) () {
+	_recv._NamedMixedNoResult_Do(func(pkg.String, ...pkg.String) () {
 		return 
 	})
 }
@@ -435,7 +436,7 @@ func (_recv *M0) _NamedMixedNoResult_Calls() []_M0_NamedMixedNoResult_Call {
 	return _dat.NamedMixedNoResultCalls
 }
 
-func (_recv *M0) NamedMixedOneResult(x string, y ...string) error {
+func (_recv *M0) NamedMixedOneResult(x pkg.String, y ...pkg.String) error {
 	if _recv == nil {
 		panic("M0.NamedMixedOneResult: nil pointer receiver")
 	}
@@ -453,7 +454,7 @@ func (_recv *M0) NamedMixedOneResult(x string, y ...string) error {
 	return _fn(x, y...)
 }
 
-func (_recv *M0) _NamedMixedOneResult_Do(fn func(string, ...string) (error)) {
+func (_recv *M0) _NamedMixedOneResult_Do(fn func(pkg.String, ...pkg.String) (error)) {
 	if _recv == nil {
 		panic("M0.NamedMixedOneResult: nil pointer receiver")
 	}
@@ -461,9 +462,9 @@ func (_recv *M0) _NamedMixedOneResult_Do(fn func(string, ...string) (error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.NamedMixedOneResultMocks = []func(string, ...string) (error){}
+		_dat.NamedMixedOneResultMocks = []func(pkg.String, ...pkg.String) (error){}
 	} else if len(_dat.NamedMixedOneResultMocks) < 2 {
-		_dat.NamedMixedOneResultMocks = []func(string, ...string) (error){fn, fn}
+		_dat.NamedMixedOneResultMocks = []func(pkg.String, ...pkg.String) (error){fn, fn}
 	} else {
 		_dat.NamedMixedOneResultMocks = _dat.NamedMixedOneResultMocks[:len(_dat.NamedMixedOneResultMocks)-1]
 		_dat.NamedMixedOneResultMocks = append(_dat.NamedMixedOneResultMocks, fn)
@@ -472,13 +473,13 @@ func (_recv *M0) _NamedMixedOneResult_Do(fn func(string, ...string) (error)) {
 }
 
 func (_recv *M0) _NamedMixedOneResult_Stub() {
-	_recv._NamedMixedOneResult_Do(func(string, ...string) (r0 error) {
+	_recv._NamedMixedOneResult_Do(func(pkg.String, ...pkg.String) (r0 error) {
 		return r0
 	})
 }
 
 func (_recv *M0) _NamedMixedOneResult_Return(r0 error) {
-	_recv._NamedMixedOneResult_Do(func(string, ...string) (error) {
+	_recv._NamedMixedOneResult_Do(func(pkg.String, ...pkg.String) (error) {
 		return r0
 	})
 }
@@ -493,7 +494,7 @@ func (_recv *M0) _NamedMixedOneResult_Calls() []_M0_NamedMixedOneResult_Call {
 	return _dat.NamedMixedOneResultCalls
 }
 
-func (_recv *M0) NamedMixedTwoResults(x string, y ...string) (int, error) {
+func (_recv *M0) NamedMixedTwoResults(x pkg.String, y ...pkg.String) (pkg.Int, error) {
 	if _recv == nil {
 		panic("M0.NamedMixedTwoResults: nil pointer receiver")
 	}
@@ -511,7 +512,7 @@ func (_recv *M0) NamedMixedTwoResults(x string, y ...string) (int, error) {
 	return _fn(x, y...)
 }
 
-func (_recv *M0) _NamedMixedTwoResults_Do(fn func(string, ...string) (int, error)) {
+func (_recv *M0) _NamedMixedTwoResults_Do(fn func(pkg.String, ...pkg.String) (pkg.Int, error)) {
 	if _recv == nil {
 		panic("M0.NamedMixedTwoResults: nil pointer receiver")
 	}
@@ -519,9 +520,9 @@ func (_recv *M0) _NamedMixedTwoResults_Do(fn func(string, ...string) (int, error
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.NamedMixedTwoResultsMocks = []func(string, ...string) (int, error){}
+		_dat.NamedMixedTwoResultsMocks = []func(pkg.String, ...pkg.String) (pkg.Int, error){}
 	} else if len(_dat.NamedMixedTwoResultsMocks) < 2 {
-		_dat.NamedMixedTwoResultsMocks = []func(string, ...string) (int, error){fn, fn}
+		_dat.NamedMixedTwoResultsMocks = []func(pkg.String, ...pkg.String) (pkg.Int, error){fn, fn}
 	} else {
 		_dat.NamedMixedTwoResultsMocks = _dat.NamedMixedTwoResultsMocks[:len(_dat.NamedMixedTwoResultsMocks)-1]
 		_dat.NamedMixedTwoResultsMocks = append(_dat.NamedMixedTwoResultsMocks, fn)
@@ -530,13 +531,13 @@ func (_recv *M0) _NamedMixedTwoResults_Do(fn func(string, ...string) (int, error
 }
 
 func (_recv *M0) _NamedMixedTwoResults_Stub() {
-	_recv._NamedMixedTwoResults_Do(func(string, ...string) (r0 int, r1 error) {
+	_recv._NamedMixedTwoResults_Do(func(pkg.String, ...pkg.String) (r0 pkg.Int, r1 error) {
 		return r0, r1
 	})
 }
 
-func (_recv *M0) _NamedMixedTwoResults_Return(r0 int, r1 error) {
-	_recv._NamedMixedTwoResults_Do(func(string, ...string) (int, error) {
+func (_recv *M0) _NamedMixedTwoResults_Return(r0 pkg.Int, r1 error) {
+	_recv._NamedMixedTwoResults_Do(func(pkg.String, ...pkg.String) (pkg.Int, error) {
 		return r0, r1
 	})
 }
@@ -551,7 +552,7 @@ func (_recv *M0) _NamedMixedTwoResults_Calls() []_M0_NamedMixedTwoResults_Call {
 	return _dat.NamedMixedTwoResultsCalls
 }
 
-func (_recv *M0) NamedParamNoResult(x string) {
+func (_recv *M0) NamedParamNoResult(x pkg.String) {
 	if _recv == nil {
 		panic("M0.NamedParamNoResult: nil pointer receiver")
 	}
@@ -569,7 +570,7 @@ func (_recv *M0) NamedParamNoResult(x string) {
 	_fn(x)
 }
 
-func (_recv *M0) _NamedParamNoResult_Do(fn func(string) ()) {
+func (_recv *M0) _NamedParamNoResult_Do(fn func(pkg.String) ()) {
 	if _recv == nil {
 		panic("M0.NamedParamNoResult: nil pointer receiver")
 	}
@@ -577,9 +578,9 @@ func (_recv *M0) _NamedParamNoResult_Do(fn func(string) ()) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.NamedParamNoResultMocks = []func(string) (){}
+		_dat.NamedParamNoResultMocks = []func(pkg.String) (){}
 	} else if len(_dat.NamedParamNoResultMocks) < 2 {
-		_dat.NamedParamNoResultMocks = []func(string) (){fn, fn}
+		_dat.NamedParamNoResultMocks = []func(pkg.String) (){fn, fn}
 	} else {
 		_dat.NamedParamNoResultMocks = _dat.NamedParamNoResultMocks[:len(_dat.NamedParamNoResultMocks)-1]
 		_dat.NamedParamNoResultMocks = append(_dat.NamedParamNoResultMocks, fn)
@@ -588,13 +589,13 @@ func (_recv *M0) _NamedParamNoResult_Do(fn func(string) ()) {
 }
 
 func (_recv *M0) _NamedParamNoResult_Stub() {
-	_recv._NamedParamNoResult_Do(func(string) () {
+	_recv._NamedParamNoResult_Do(func(pkg.String) () {
 		return 
 	})
 }
 
 func (_recv *M0) _NamedParamNoResult_Return() {
-	_recv._NamedParamNoResult_Do(func(string) () {
+	_recv._NamedParamNoResult_Do(func(pkg.String) () {
 		return 
 	})
 }
@@ -609,7 +610,7 @@ func (_recv *M0) _NamedParamNoResult_Calls() []_M0_NamedParamNoResult_Call {
 	return _dat.NamedParamNoResultCalls
 }
 
-func (_recv *M0) NamedParamOneResult(x string) error {
+func (_recv *M0) NamedParamOneResult(x pkg.String) error {
 	if _recv == nil {
 		panic("M0.NamedParamOneResult: nil pointer receiver")
 	}
@@ -627,7 +628,7 @@ func (_recv *M0) NamedParamOneResult(x string) error {
 	return _fn(x)
 }
 
-func (_recv *M0) _NamedParamOneResult_Do(fn func(string) (error)) {
+func (_recv *M0) _NamedParamOneResult_Do(fn func(pkg.String) (error)) {
 	if _recv == nil {
 		panic("M0.NamedParamOneResult: nil pointer receiver")
 	}
@@ -635,9 +636,9 @@ func (_recv *M0) _NamedParamOneResult_Do(fn func(string) (error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.NamedParamOneResultMocks = []func(string) (error){}
+		_dat.NamedParamOneResultMocks = []func(pkg.String) (error){}
 	} else if len(_dat.NamedParamOneResultMocks) < 2 {
-		_dat.NamedParamOneResultMocks = []func(string) (error){fn, fn}
+		_dat.NamedParamOneResultMocks = []func(pkg.String) (error){fn, fn}
 	} else {
 		_dat.NamedParamOneResultMocks = _dat.NamedParamOneResultMocks[:len(_dat.NamedParamOneResultMocks)-1]
 		_dat.NamedParamOneResultMocks = append(_dat.NamedParamOneResultMocks, fn)
@@ -646,13 +647,13 @@ func (_recv *M0) _NamedParamOneResult_Do(fn func(string) (error)) {
 }
 
 func (_recv *M0) _NamedParamOneResult_Stub() {
-	_recv._NamedParamOneResult_Do(func(string) (r0 error) {
+	_recv._NamedParamOneResult_Do(func(pkg.String) (r0 error) {
 		return r0
 	})
 }
 
 func (_recv *M0) _NamedParamOneResult_Return(r0 error) {
-	_recv._NamedParamOneResult_Do(func(string) (error) {
+	_recv._NamedParamOneResult_Do(func(pkg.String) (error) {
 		return r0
 	})
 }
@@ -667,7 +668,7 @@ func (_recv *M0) _NamedParamOneResult_Calls() []_M0_NamedParamOneResult_Call {
 	return _dat.NamedParamOneResultCalls
 }
 
-func (_recv *M0) NamedParamTwoResults(x string) (int, error) {
+func (_recv *M0) NamedParamTwoResults(x pkg.String) (pkg.Int, error) {
 	if _recv == nil {
 		panic("M0.NamedParamTwoResults: nil pointer receiver")
 	}
@@ -685,7 +686,7 @@ func (_recv *M0) NamedParamTwoResults(x string) (int, error) {
 	return _fn(x)
 }
 
-func (_recv *M0) _NamedParamTwoResults_Do(fn func(string) (int, error)) {
+func (_recv *M0) _NamedParamTwoResults_Do(fn func(pkg.String) (pkg.Int, error)) {
 	if _recv == nil {
 		panic("M0.NamedParamTwoResults: nil pointer receiver")
 	}
@@ -693,9 +694,9 @@ func (_recv *M0) _NamedParamTwoResults_Do(fn func(string) (int, error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.NamedParamTwoResultsMocks = []func(string) (int, error){}
+		_dat.NamedParamTwoResultsMocks = []func(pkg.String) (pkg.Int, error){}
 	} else if len(_dat.NamedParamTwoResultsMocks) < 2 {
-		_dat.NamedParamTwoResultsMocks = []func(string) (int, error){fn, fn}
+		_dat.NamedParamTwoResultsMocks = []func(pkg.String) (pkg.Int, error){fn, fn}
 	} else {
 		_dat.NamedParamTwoResultsMocks = _dat.NamedParamTwoResultsMocks[:len(_dat.NamedParamTwoResultsMocks)-1]
 		_dat.NamedParamTwoResultsMocks = append(_dat.NamedParamTwoResultsMocks, fn)
@@ -704,13 +705,13 @@ func (_recv *M0) _NamedParamTwoResults_Do(fn func(string) (int, error)) {
 }
 
 func (_recv *M0) _NamedParamTwoResults_Stub() {
-	_recv._NamedParamTwoResults_Do(func(string) (r0 int, r1 error) {
+	_recv._NamedParamTwoResults_Do(func(pkg.String) (r0 pkg.Int, r1 error) {
 		return r0, r1
 	})
 }
 
-func (_recv *M0) _NamedParamTwoResults_Return(r0 int, r1 error) {
-	_recv._NamedParamTwoResults_Do(func(string) (int, error) {
+func (_recv *M0) _NamedParamTwoResults_Return(r0 pkg.Int, r1 error) {
+	_recv._NamedParamTwoResults_Do(func(pkg.String) (pkg.Int, error) {
 		return r0, r1
 	})
 }
@@ -783,7 +784,7 @@ func (_recv *M0) _OneNamedResult_Calls() []_M0_OneNamedResult_Call {
 	return _dat.OneNamedResultCalls
 }
 
-func (_recv *M0) OneParamNoResult(p0 string) {
+func (_recv *M0) OneParamNoResult(p0 pkg.String) {
 	if _recv == nil {
 		panic("M0.OneParamNoResult: nil pointer receiver")
 	}
@@ -801,7 +802,7 @@ func (_recv *M0) OneParamNoResult(p0 string) {
 	_fn(p0)
 }
 
-func (_recv *M0) _OneParamNoResult_Do(fn func(string) ()) {
+func (_recv *M0) _OneParamNoResult_Do(fn func(pkg.String) ()) {
 	if _recv == nil {
 		panic("M0.OneParamNoResult: nil pointer receiver")
 	}
@@ -809,9 +810,9 @@ func (_recv *M0) _OneParamNoResult_Do(fn func(string) ()) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.OneParamNoResultMocks = []func(string) (){}
+		_dat.OneParamNoResultMocks = []func(pkg.String) (){}
 	} else if len(_dat.OneParamNoResultMocks) < 2 {
-		_dat.OneParamNoResultMocks = []func(string) (){fn, fn}
+		_dat.OneParamNoResultMocks = []func(pkg.String) (){fn, fn}
 	} else {
 		_dat.OneParamNoResultMocks = _dat.OneParamNoResultMocks[:len(_dat.OneParamNoResultMocks)-1]
 		_dat.OneParamNoResultMocks = append(_dat.OneParamNoResultMocks, fn)
@@ -820,13 +821,13 @@ func (_recv *M0) _OneParamNoResult_Do(fn func(string) ()) {
 }
 
 func (_recv *M0) _OneParamNoResult_Stub() {
-	_recv._OneParamNoResult_Do(func(string) () {
+	_recv._OneParamNoResult_Do(func(pkg.String) () {
 		return 
 	})
 }
 
 func (_recv *M0) _OneParamNoResult_Return() {
-	_recv._OneParamNoResult_Do(func(string) () {
+	_recv._OneParamNoResult_Do(func(pkg.String) () {
 		return 
 	})
 }
@@ -841,7 +842,7 @@ func (_recv *M0) _OneParamNoResult_Calls() []_M0_OneParamNoResult_Call {
 	return _dat.OneParamNoResultCalls
 }
 
-func (_recv *M0) OneParamOneResult(p0 string) error {
+func (_recv *M0) OneParamOneResult(p0 pkg.String) error {
 	if _recv == nil {
 		panic("M0.OneParamOneResult: nil pointer receiver")
 	}
@@ -859,7 +860,7 @@ func (_recv *M0) OneParamOneResult(p0 string) error {
 	return _fn(p0)
 }
 
-func (_recv *M0) _OneParamOneResult_Do(fn func(string) (error)) {
+func (_recv *M0) _OneParamOneResult_Do(fn func(pkg.String) (error)) {
 	if _recv == nil {
 		panic("M0.OneParamOneResult: nil pointer receiver")
 	}
@@ -867,9 +868,9 @@ func (_recv *M0) _OneParamOneResult_Do(fn func(string) (error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.OneParamOneResultMocks = []func(string) (error){}
+		_dat.OneParamOneResultMocks = []func(pkg.String) (error){}
 	} else if len(_dat.OneParamOneResultMocks) < 2 {
-		_dat.OneParamOneResultMocks = []func(string) (error){fn, fn}
+		_dat.OneParamOneResultMocks = []func(pkg.String) (error){fn, fn}
 	} else {
 		_dat.OneParamOneResultMocks = _dat.OneParamOneResultMocks[:len(_dat.OneParamOneResultMocks)-1]
 		_dat.OneParamOneResultMocks = append(_dat.OneParamOneResultMocks, fn)
@@ -878,13 +879,13 @@ func (_recv *M0) _OneParamOneResult_Do(fn func(string) (error)) {
 }
 
 func (_recv *M0) _OneParamOneResult_Stub() {
-	_recv._OneParamOneResult_Do(func(string) (r0 error) {
+	_recv._OneParamOneResult_Do(func(pkg.String) (r0 error) {
 		return r0
 	})
 }
 
 func (_recv *M0) _OneParamOneResult_Return(r0 error) {
-	_recv._OneParamOneResult_Do(func(string) (error) {
+	_recv._OneParamOneResult_Do(func(pkg.String) (error) {
 		return r0
 	})
 }
@@ -899,7 +900,7 @@ func (_recv *M0) _OneParamOneResult_Calls() []_M0_OneParamOneResult_Call {
 	return _dat.OneParamOneResultCalls
 }
 
-func (_recv *M0) OneParamTwoResults(p0 string) (int, error) {
+func (_recv *M0) OneParamTwoResults(p0 pkg.String) (pkg.Int, error) {
 	if _recv == nil {
 		panic("M0.OneParamTwoResults: nil pointer receiver")
 	}
@@ -917,7 +918,7 @@ func (_recv *M0) OneParamTwoResults(p0 string) (int, error) {
 	return _fn(p0)
 }
 
-func (_recv *M0) _OneParamTwoResults_Do(fn func(string) (int, error)) {
+func (_recv *M0) _OneParamTwoResults_Do(fn func(pkg.String) (pkg.Int, error)) {
 	if _recv == nil {
 		panic("M0.OneParamTwoResults: nil pointer receiver")
 	}
@@ -925,9 +926,9 @@ func (_recv *M0) _OneParamTwoResults_Do(fn func(string) (int, error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.OneParamTwoResultsMocks = []func(string) (int, error){}
+		_dat.OneParamTwoResultsMocks = []func(pkg.String) (pkg.Int, error){}
 	} else if len(_dat.OneParamTwoResultsMocks) < 2 {
-		_dat.OneParamTwoResultsMocks = []func(string) (int, error){fn, fn}
+		_dat.OneParamTwoResultsMocks = []func(pkg.String) (pkg.Int, error){fn, fn}
 	} else {
 		_dat.OneParamTwoResultsMocks = _dat.OneParamTwoResultsMocks[:len(_dat.OneParamTwoResultsMocks)-1]
 		_dat.OneParamTwoResultsMocks = append(_dat.OneParamTwoResultsMocks, fn)
@@ -936,13 +937,13 @@ func (_recv *M0) _OneParamTwoResults_Do(fn func(string) (int, error)) {
 }
 
 func (_recv *M0) _OneParamTwoResults_Stub() {
-	_recv._OneParamTwoResults_Do(func(string) (r0 int, r1 error) {
+	_recv._OneParamTwoResults_Do(func(pkg.String) (r0 pkg.Int, r1 error) {
 		return r0, r1
 	})
 }
 
-func (_recv *M0) _OneParamTwoResults_Return(r0 int, r1 error) {
-	_recv._OneParamTwoResults_Do(func(string) (int, error) {
+func (_recv *M0) _OneParamTwoResults_Return(r0 pkg.Int, r1 error) {
+	_recv._OneParamTwoResults_Do(func(pkg.String) (pkg.Int, error) {
 		return r0, r1
 	})
 }
@@ -1073,7 +1074,7 @@ func (_recv *M0) _Simple_Calls() []_M0_Simple_Call {
 	return _dat.SimpleCalls
 }
 
-func (_recv *M0) TwoNamedResults() (int, error) {
+func (_recv *M0) TwoNamedResults() (pkg.Int, error) {
 	if _recv == nil {
 		panic("M0.TwoNamedResults: nil pointer receiver")
 	}
@@ -1091,7 +1092,7 @@ func (_recv *M0) TwoNamedResults() (int, error) {
 	return _fn()
 }
 
-func (_recv *M0) _TwoNamedResults_Do(fn func() (int, error)) {
+func (_recv *M0) _TwoNamedResults_Do(fn func() (pkg.Int, error)) {
 	if _recv == nil {
 		panic("M0.TwoNamedResults: nil pointer receiver")
 	}
@@ -1099,9 +1100,9 @@ func (_recv *M0) _TwoNamedResults_Do(fn func() (int, error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.TwoNamedResultsMocks = []func() (int, error){}
+		_dat.TwoNamedResultsMocks = []func() (pkg.Int, error){}
 	} else if len(_dat.TwoNamedResultsMocks) < 2 {
-		_dat.TwoNamedResultsMocks = []func() (int, error){fn, fn}
+		_dat.TwoNamedResultsMocks = []func() (pkg.Int, error){fn, fn}
 	} else {
 		_dat.TwoNamedResultsMocks = _dat.TwoNamedResultsMocks[:len(_dat.TwoNamedResultsMocks)-1]
 		_dat.TwoNamedResultsMocks = append(_dat.TwoNamedResultsMocks, fn)
@@ -1110,13 +1111,13 @@ func (_recv *M0) _TwoNamedResults_Do(fn func() (int, error)) {
 }
 
 func (_recv *M0) _TwoNamedResults_Stub() {
-	_recv._TwoNamedResults_Do(func() (n int, err error) {
+	_recv._TwoNamedResults_Do(func() (n pkg.Int, err error) {
 		return n, err
 	})
 }
 
-func (_recv *M0) _TwoNamedResults_Return(n int, err error) {
-	_recv._TwoNamedResults_Do(func() (int, error) {
+func (_recv *M0) _TwoNamedResults_Return(n pkg.Int, err error) {
+	_recv._TwoNamedResults_Do(func() (pkg.Int, error) {
 		return n, err
 	})
 }
@@ -1131,7 +1132,7 @@ func (_recv *M0) _TwoNamedResults_Calls() []_M0_TwoNamedResults_Call {
 	return _dat.TwoNamedResultsCalls
 }
 
-func (_recv *M0) TwoParamsNoResult(p0 string, p1 string) {
+func (_recv *M0) TwoParamsNoResult(p0 pkg.String, p1 pkg.String) {
 	if _recv == nil {
 		panic("M0.TwoParamsNoResult: nil pointer receiver")
 	}
@@ -1149,7 +1150,7 @@ func (_recv *M0) TwoParamsNoResult(p0 string, p1 string) {
 	_fn(p0, p1)
 }
 
-func (_recv *M0) _TwoParamsNoResult_Do(fn func(string, string) ()) {
+func (_recv *M0) _TwoParamsNoResult_Do(fn func(pkg.String, pkg.String) ()) {
 	if _recv == nil {
 		panic("M0.TwoParamsNoResult: nil pointer receiver")
 	}
@@ -1157,9 +1158,9 @@ func (_recv *M0) _TwoParamsNoResult_Do(fn func(string, string) ()) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.TwoParamsNoResultMocks = []func(string, string) (){}
+		_dat.TwoParamsNoResultMocks = []func(pkg.String, pkg.String) (){}
 	} else if len(_dat.TwoParamsNoResultMocks) < 2 {
-		_dat.TwoParamsNoResultMocks = []func(string, string) (){fn, fn}
+		_dat.TwoParamsNoResultMocks = []func(pkg.String, pkg.String) (){fn, fn}
 	} else {
 		_dat.TwoParamsNoResultMocks = _dat.TwoParamsNoResultMocks[:len(_dat.TwoParamsNoResultMocks)-1]
 		_dat.TwoParamsNoResultMocks = append(_dat.TwoParamsNoResultMocks, fn)
@@ -1168,13 +1169,13 @@ func (_recv *M0) _TwoParamsNoResult_Do(fn func(string, string) ()) {
 }
 
 func (_recv *M0) _TwoParamsNoResult_Stub() {
-	_recv._TwoParamsNoResult_Do(func(string, string) () {
+	_recv._TwoParamsNoResult_Do(func(pkg.String, pkg.String) () {
 		return 
 	})
 }
 
 func (_recv *M0) _TwoParamsNoResult_Return() {
-	_recv._TwoParamsNoResult_Do(func(string, string) () {
+	_recv._TwoParamsNoResult_Do(func(pkg.String, pkg.String) () {
 		return 
 	})
 }
@@ -1189,7 +1190,7 @@ func (_recv *M0) _TwoParamsNoResult_Calls() []_M0_TwoParamsNoResult_Call {
 	return _dat.TwoParamsNoResultCalls
 }
 
-func (_recv *M0) TwoParamsOneResult(p0 string, p1 string) error {
+func (_recv *M0) TwoParamsOneResult(p0 pkg.String, p1 pkg.String) error {
 	if _recv == nil {
 		panic("M0.TwoParamsOneResult: nil pointer receiver")
 	}
@@ -1207,7 +1208,7 @@ func (_recv *M0) TwoParamsOneResult(p0 string, p1 string) error {
 	return _fn(p0, p1)
 }
 
-func (_recv *M0) _TwoParamsOneResult_Do(fn func(string, string) (error)) {
+func (_recv *M0) _TwoParamsOneResult_Do(fn func(pkg.String, pkg.String) (error)) {
 	if _recv == nil {
 		panic("M0.TwoParamsOneResult: nil pointer receiver")
 	}
@@ -1215,9 +1216,9 @@ func (_recv *M0) _TwoParamsOneResult_Do(fn func(string, string) (error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.TwoParamsOneResultMocks = []func(string, string) (error){}
+		_dat.TwoParamsOneResultMocks = []func(pkg.String, pkg.String) (error){}
 	} else if len(_dat.TwoParamsOneResultMocks) < 2 {
-		_dat.TwoParamsOneResultMocks = []func(string, string) (error){fn, fn}
+		_dat.TwoParamsOneResultMocks = []func(pkg.String, pkg.String) (error){fn, fn}
 	} else {
 		_dat.TwoParamsOneResultMocks = _dat.TwoParamsOneResultMocks[:len(_dat.TwoParamsOneResultMocks)-1]
 		_dat.TwoParamsOneResultMocks = append(_dat.TwoParamsOneResultMocks, fn)
@@ -1226,13 +1227,13 @@ func (_recv *M0) _TwoParamsOneResult_Do(fn func(string, string) (error)) {
 }
 
 func (_recv *M0) _TwoParamsOneResult_Stub() {
-	_recv._TwoParamsOneResult_Do(func(string, string) (r0 error) {
+	_recv._TwoParamsOneResult_Do(func(pkg.String, pkg.String) (r0 error) {
 		return r0
 	})
 }
 
 func (_recv *M0) _TwoParamsOneResult_Return(r0 error) {
-	_recv._TwoParamsOneResult_Do(func(string, string) (error) {
+	_recv._TwoParamsOneResult_Do(func(pkg.String, pkg.String) (error) {
 		return r0
 	})
 }
@@ -1247,7 +1248,7 @@ func (_recv *M0) _TwoParamsOneResult_Calls() []_M0_TwoParamsOneResult_Call {
 	return _dat.TwoParamsOneResultCalls
 }
 
-func (_recv *M0) TwoParamsTwoResults(p0 string, p1 string) (int, error) {
+func (_recv *M0) TwoParamsTwoResults(p0 pkg.String, p1 pkg.String) (pkg.Int, error) {
 	if _recv == nil {
 		panic("M0.TwoParamsTwoResults: nil pointer receiver")
 	}
@@ -1265,7 +1266,7 @@ func (_recv *M0) TwoParamsTwoResults(p0 string, p1 string) (int, error) {
 	return _fn(p0, p1)
 }
 
-func (_recv *M0) _TwoParamsTwoResults_Do(fn func(string, string) (int, error)) {
+func (_recv *M0) _TwoParamsTwoResults_Do(fn func(pkg.String, pkg.String) (pkg.Int, error)) {
 	if _recv == nil {
 		panic("M0.TwoParamsTwoResults: nil pointer receiver")
 	}
@@ -1273,9 +1274,9 @@ func (_recv *M0) _TwoParamsTwoResults_Do(fn func(string, string) (int, error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.TwoParamsTwoResultsMocks = []func(string, string) (int, error){}
+		_dat.TwoParamsTwoResultsMocks = []func(pkg.String, pkg.String) (pkg.Int, error){}
 	} else if len(_dat.TwoParamsTwoResultsMocks) < 2 {
-		_dat.TwoParamsTwoResultsMocks = []func(string, string) (int, error){fn, fn}
+		_dat.TwoParamsTwoResultsMocks = []func(pkg.String, pkg.String) (pkg.Int, error){fn, fn}
 	} else {
 		_dat.TwoParamsTwoResultsMocks = _dat.TwoParamsTwoResultsMocks[:len(_dat.TwoParamsTwoResultsMocks)-1]
 		_dat.TwoParamsTwoResultsMocks = append(_dat.TwoParamsTwoResultsMocks, fn)
@@ -1284,13 +1285,13 @@ func (_recv *M0) _TwoParamsTwoResults_Do(fn func(string, string) (int, error)) {
 }
 
 func (_recv *M0) _TwoParamsTwoResults_Stub() {
-	_recv._TwoParamsTwoResults_Do(func(string, string) (r0 int, r1 error) {
+	_recv._TwoParamsTwoResults_Do(func(pkg.String, pkg.String) (r0 pkg.Int, r1 error) {
 		return r0, r1
 	})
 }
 
-func (_recv *M0) _TwoParamsTwoResults_Return(r0 int, r1 error) {
-	_recv._TwoParamsTwoResults_Do(func(string, string) (int, error) {
+func (_recv *M0) _TwoParamsTwoResults_Return(r0 pkg.Int, r1 error) {
+	_recv._TwoParamsTwoResults_Do(func(pkg.String, pkg.String) (pkg.Int, error) {
 		return r0, r1
 	})
 }
@@ -1305,7 +1306,7 @@ func (_recv *M0) _TwoParamsTwoResults_Calls() []_M0_TwoParamsTwoResults_Call {
 	return _dat.TwoParamsTwoResultsCalls
 }
 
-func (_recv *M0) TwoResults() (int, error) {
+func (_recv *M0) TwoResults() (pkg.Int, error) {
 	if _recv == nil {
 		panic("M0.TwoResults: nil pointer receiver")
 	}
@@ -1323,7 +1324,7 @@ func (_recv *M0) TwoResults() (int, error) {
 	return _fn()
 }
 
-func (_recv *M0) _TwoResults_Do(fn func() (int, error)) {
+func (_recv *M0) _TwoResults_Do(fn func() (pkg.Int, error)) {
 	if _recv == nil {
 		panic("M0.TwoResults: nil pointer receiver")
 	}
@@ -1331,9 +1332,9 @@ func (_recv *M0) _TwoResults_Do(fn func() (int, error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.TwoResultsMocks = []func() (int, error){}
+		_dat.TwoResultsMocks = []func() (pkg.Int, error){}
 	} else if len(_dat.TwoResultsMocks) < 2 {
-		_dat.TwoResultsMocks = []func() (int, error){fn, fn}
+		_dat.TwoResultsMocks = []func() (pkg.Int, error){fn, fn}
 	} else {
 		_dat.TwoResultsMocks = _dat.TwoResultsMocks[:len(_dat.TwoResultsMocks)-1]
 		_dat.TwoResultsMocks = append(_dat.TwoResultsMocks, fn)
@@ -1342,13 +1343,13 @@ func (_recv *M0) _TwoResults_Do(fn func() (int, error)) {
 }
 
 func (_recv *M0) _TwoResults_Stub() {
-	_recv._TwoResults_Do(func() (r0 int, r1 error) {
+	_recv._TwoResults_Do(func() (r0 pkg.Int, r1 error) {
 		return r0, r1
 	})
 }
 
-func (_recv *M0) _TwoResults_Return(r0 int, r1 error) {
-	_recv._TwoResults_Do(func() (int, error) {
+func (_recv *M0) _TwoResults_Return(r0 pkg.Int, r1 error) {
+	_recv._TwoResults_Do(func() (pkg.Int, error) {
 		return r0, r1
 	})
 }
@@ -1363,7 +1364,7 @@ func (_recv *M0) _TwoResults_Calls() []_M0_TwoResults_Call {
 	return _dat.TwoResultsCalls
 }
 
-func (_recv *M0) VariadicNoResult(p0 ...string) {
+func (_recv *M0) VariadicNoResult(p0 ...pkg.String) {
 	if _recv == nil {
 		panic("M0.VariadicNoResult: nil pointer receiver")
 	}
@@ -1381,7 +1382,7 @@ func (_recv *M0) VariadicNoResult(p0 ...string) {
 	_fn(p0...)
 }
 
-func (_recv *M0) _VariadicNoResult_Do(fn func(...string) ()) {
+func (_recv *M0) _VariadicNoResult_Do(fn func(...pkg.String) ()) {
 	if _recv == nil {
 		panic("M0.VariadicNoResult: nil pointer receiver")
 	}
@@ -1389,9 +1390,9 @@ func (_recv *M0) _VariadicNoResult_Do(fn func(...string) ()) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.VariadicNoResultMocks = []func(...string) (){}
+		_dat.VariadicNoResultMocks = []func(...pkg.String) (){}
 	} else if len(_dat.VariadicNoResultMocks) < 2 {
-		_dat.VariadicNoResultMocks = []func(...string) (){fn, fn}
+		_dat.VariadicNoResultMocks = []func(...pkg.String) (){fn, fn}
 	} else {
 		_dat.VariadicNoResultMocks = _dat.VariadicNoResultMocks[:len(_dat.VariadicNoResultMocks)-1]
 		_dat.VariadicNoResultMocks = append(_dat.VariadicNoResultMocks, fn)
@@ -1400,13 +1401,13 @@ func (_recv *M0) _VariadicNoResult_Do(fn func(...string) ()) {
 }
 
 func (_recv *M0) _VariadicNoResult_Stub() {
-	_recv._VariadicNoResult_Do(func(...string) () {
+	_recv._VariadicNoResult_Do(func(...pkg.String) () {
 		return 
 	})
 }
 
 func (_recv *M0) _VariadicNoResult_Return() {
-	_recv._VariadicNoResult_Do(func(...string) () {
+	_recv._VariadicNoResult_Do(func(...pkg.String) () {
 		return 
 	})
 }
@@ -1421,7 +1422,7 @@ func (_recv *M0) _VariadicNoResult_Calls() []_M0_VariadicNoResult_Call {
 	return _dat.VariadicNoResultCalls
 }
 
-func (_recv *M0) VariadicOneResult(p0 ...string) error {
+func (_recv *M0) VariadicOneResult(p0 ...pkg.String) error {
 	if _recv == nil {
 		panic("M0.VariadicOneResult: nil pointer receiver")
 	}
@@ -1439,7 +1440,7 @@ func (_recv *M0) VariadicOneResult(p0 ...string) error {
 	return _fn(p0...)
 }
 
-func (_recv *M0) _VariadicOneResult_Do(fn func(...string) (error)) {
+func (_recv *M0) _VariadicOneResult_Do(fn func(...pkg.String) (error)) {
 	if _recv == nil {
 		panic("M0.VariadicOneResult: nil pointer receiver")
 	}
@@ -1447,9 +1448,9 @@ func (_recv *M0) _VariadicOneResult_Do(fn func(...string) (error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.VariadicOneResultMocks = []func(...string) (error){}
+		_dat.VariadicOneResultMocks = []func(...pkg.String) (error){}
 	} else if len(_dat.VariadicOneResultMocks) < 2 {
-		_dat.VariadicOneResultMocks = []func(...string) (error){fn, fn}
+		_dat.VariadicOneResultMocks = []func(...pkg.String) (error){fn, fn}
 	} else {
 		_dat.VariadicOneResultMocks = _dat.VariadicOneResultMocks[:len(_dat.VariadicOneResultMocks)-1]
 		_dat.VariadicOneResultMocks = append(_dat.VariadicOneResultMocks, fn)
@@ -1458,13 +1459,13 @@ func (_recv *M0) _VariadicOneResult_Do(fn func(...string) (error)) {
 }
 
 func (_recv *M0) _VariadicOneResult_Stub() {
-	_recv._VariadicOneResult_Do(func(...string) (r0 error) {
+	_recv._VariadicOneResult_Do(func(...pkg.String) (r0 error) {
 		return r0
 	})
 }
 
 func (_recv *M0) _VariadicOneResult_Return(r0 error) {
-	_recv._VariadicOneResult_Do(func(...string) (error) {
+	_recv._VariadicOneResult_Do(func(...pkg.String) (error) {
 		return r0
 	})
 }
@@ -1479,7 +1480,7 @@ func (_recv *M0) _VariadicOneResult_Calls() []_M0_VariadicOneResult_Call {
 	return _dat.VariadicOneResultCalls
 }
 
-func (_recv *M0) VariadicTwoResults(p0 ...string) (int, error) {
+func (_recv *M0) VariadicTwoResults(p0 ...pkg.String) (pkg.Int, error) {
 	if _recv == nil {
 		panic("M0.VariadicTwoResults: nil pointer receiver")
 	}
@@ -1497,7 +1498,7 @@ func (_recv *M0) VariadicTwoResults(p0 ...string) (int, error) {
 	return _fn(p0...)
 }
 
-func (_recv *M0) _VariadicTwoResults_Do(fn func(...string) (int, error)) {
+func (_recv *M0) _VariadicTwoResults_Do(fn func(...pkg.String) (pkg.Int, error)) {
 	if _recv == nil {
 		panic("M0.VariadicTwoResults: nil pointer receiver")
 	}
@@ -1505,9 +1506,9 @@ func (_recv *M0) _VariadicTwoResults_Do(fn func(...string) (int, error)) {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	if fn == nil {
-		_dat.VariadicTwoResultsMocks = []func(...string) (int, error){}
+		_dat.VariadicTwoResultsMocks = []func(...pkg.String) (pkg.Int, error){}
 	} else if len(_dat.VariadicTwoResultsMocks) < 2 {
-		_dat.VariadicTwoResultsMocks = []func(...string) (int, error){fn, fn}
+		_dat.VariadicTwoResultsMocks = []func(...pkg.String) (pkg.Int, error){fn, fn}
 	} else {
 		_dat.VariadicTwoResultsMocks = _dat.VariadicTwoResultsMocks[:len(_dat.VariadicTwoResultsMocks)-1]
 		_dat.VariadicTwoResultsMocks = append(_dat.VariadicTwoResultsMocks, fn)
@@ -1516,13 +1517,13 @@ func (_recv *M0) _VariadicTwoResults_Do(fn func(...string) (int, error)) {
 }
 
 func (_recv *M0) _VariadicTwoResults_Stub() {
-	_recv._VariadicTwoResults_Do(func(...string) (r0 int, r1 error) {
+	_recv._VariadicTwoResults_Do(func(...pkg.String) (r0 pkg.Int, r1 error) {
 		return r0, r1
 	})
 }
 
-func (_recv *M0) _VariadicTwoResults_Return(r0 int, r1 error) {
-	_recv._VariadicTwoResults_Do(func(...string) (int, error) {
+func (_recv *M0) _VariadicTwoResults_Return(r0 pkg.Int, r1 error) {
+	_recv._VariadicTwoResults_Do(func(...pkg.String) (pkg.Int, error) {
 		return r0, r1
 	})
 }

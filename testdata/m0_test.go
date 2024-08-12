@@ -6,23 +6,24 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
+	"lesiw.io/moxie/testdata/pkg"
 )
 
 func TestNoMock(t *testing.T) {
-	t.Cleanup(func() { simpleCalled = false })
+	t.Cleanup(func() { pkg.SimpleCalled = false })
 	var m0 M0
 	m0.Simple()
-	if !simpleCalled {
+	if !pkg.SimpleCalled {
 		t.Error("want Simple() call")
 	}
 }
 
 func TestStub(t *testing.T) {
-	t.Cleanup(func() { simpleCalled = false })
+	t.Cleanup(func() { pkg.SimpleCalled = false })
 	var m0 M0
 	m0._Simple_Stub()
 	m0.Simple()
-	if simpleCalled {
+	if pkg.SimpleCalled {
 		t.Error("want mock, got Simple() call")
 	}
 }

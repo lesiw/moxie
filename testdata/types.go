@@ -1,12 +1,11 @@
 package testdata
 
-type M0 struct{ *T0 }
+type M0 struct{ T0 }
+type T0 struct{}
 
-type T0 struct {
-	simpleCalled bool
-}
+var simpleCalled bool
 
-func (t *T0) Simple() { t.simpleCalled = true }
+func (T0) Simple() { simpleCalled = true }
 
 func (T0) OneResult() error                    { return nil }
 func (T0) OneNamedResult() (err error)         { return }

@@ -28,6 +28,21 @@ func TestStub(t *testing.T) {
 	}
 }
 
+func TestUnmock(t *testing.T) {
+	t.Cleanup(func() { pkg.SimpleCalled = false })
+	var m0 M0
+	m0._Simple_Stub()
+	m0.Simple()
+	if pkg.SimpleCalled {
+		t.Error("want mock, got Simple() call")
+	}
+	m0._Simple_Do(nil)
+	m0.Simple()
+	if !pkg.SimpleCalled {
+		t.Error("want Simple() call, got mock")
+	}
+}
+
 func TestOneResult(t *testing.T) {
 	var m0 M0
 	want := errors.New("error result")

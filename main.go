@@ -192,7 +192,7 @@ func sig(sel *types.Selection) string {
 	b.WriteString(sel.Obj().Name())
 	sig := sel.Obj().Type().(*types.Signature)
 	b.WriteString("(")
-	names := paramnames(sig.Params())
+	names := paramnames(sig.Params(), false)
 	for i := range sig.Params().Len() {
 		p := sig.Params().At(i)
 		if i > 0 {
@@ -229,7 +229,7 @@ func sig(sel *types.Selection) string {
 
 func args(tup *types.Tuple, variadic bool) string {
 	var b strings.Builder
-	names := paramnames(tup)
+	names := paramnames(tup, false)
 	for i := range tup.Len() {
 		if i > 0 {
 			b.WriteString(", ")
@@ -338,7 +338,7 @@ func paramfields(sig *types.Signature) string {
 	}
 	var b strings.Builder
 	b.WriteString("\n")
-	names := paramnames(params)
+	names := paramnames(params, true)
 	for i := range params.Len() {
 		if i > 0 {
 			b.WriteString("\n")
@@ -353,7 +353,7 @@ func paramfields(sig *types.Signature) string {
 	return b.String()
 }
 
-func paramnames(tup *types.Tuple) []string {
+func paramnames(tup *types.Tuple, export bool) []string {
 	names := make([]string, 0, tup.Len())
 	for i := range tup.Len() {
 		v := tup.At(i)
@@ -361,7 +361,10 @@ func paramnames(tup *types.Tuple) []string {
 		if v.Name() == "" {
 			name = fmt.Sprintf("P%d", i)
 		} else {
-			name = capitalize(v.Name())
+			name = v.Name()
+			if export {
+				name = capitalize(name)
+			}
 		}
 		for slices.Contains(names, name) {
 			name = name + "_"

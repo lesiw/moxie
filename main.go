@@ -192,12 +192,13 @@ func sig(sel *types.Selection) string {
 	b.WriteString(sel.Obj().Name())
 	sig := sel.Obj().Type().(*types.Signature)
 	b.WriteString("(")
+	names := paramnames(sig.Params())
 	for i := range sig.Params().Len() {
 		p := sig.Params().At(i)
 		if i > 0 {
 			b.WriteString(", ")
 		}
-		b.WriteString(cmp.Or(p.Name(), fmt.Sprintf("p%d", i)))
+		b.WriteString(names[i])
 		b.WriteString(" ")
 		if i == sig.Params().Len()-1 && sig.Variadic() {
 			b.WriteString("...")
@@ -228,12 +229,12 @@ func sig(sel *types.Selection) string {
 
 func args(tup *types.Tuple, variadic bool) string {
 	var b strings.Builder
+	names := paramnames(tup)
 	for i := range tup.Len() {
-		v := tup.At(i)
 		if i > 0 {
 			b.WriteString(", ")
 		}
-		b.WriteString(cmp.Or(v.Name(), fmt.Sprintf("p%d", i)))
+		b.WriteString(names[i])
 		if i == tup.Len()-1 && variadic {
 			b.WriteString("...")
 		}
@@ -260,19 +261,13 @@ func argtypes(tup *types.Tuple, variadic bool) string {
 
 func resultparams(tup *types.Tuple) string {
 	var b strings.Builder
+	names := resultnames(tup)
 	for i := range tup.Len() {
 		v := tup.At(i)
 		if i > 0 {
 			b.WriteString(", ")
 		}
-		if v.Name() == "" {
-			b.WriteString(fmt.Sprintf("r%d", i))
-		} else if v.Name() == "error" {
-			// Fix a common type shadowing error.
-			b.WriteString("err")
-		} else {
-			b.WriteString(v.Name())
-		}
+		b.WriteString(names[i])
 		b.WriteString(" " + types.TypeString(v.Type(), qualifier))
 	}
 	return b.String()
@@ -292,19 +287,12 @@ func resulttypes(tup *types.Tuple) string {
 
 func resultargs(tup *types.Tuple) string {
 	var b strings.Builder
+	names := resultnames(tup)
 	for i := range tup.Len() {
-		v := tup.At(i)
 		if i > 0 {
 			b.WriteString(", ")
 		}
-		if v.Name() == "" {
-			b.WriteString(fmt.Sprintf("r%d", i))
-		} else if v.Name() == "error" {
-			// Fix a common type shadowing error.
-			b.WriteString("err")
-		} else {
-			b.WriteString(v.Name())
-		}
+		b.WriteString(names[i])
 	}
 	return b.String()
 }
@@ -350,18 +338,58 @@ func paramfields(sig *types.Signature) string {
 	}
 	var b strings.Builder
 	b.WriteString("\n")
+	names := paramnames(params)
 	for i := range params.Len() {
 		if i > 0 {
 			b.WriteString("\n")
 		}
 		param := params.At(i)
 		b.WriteString(fmt.Sprintf("\t%s %s",
-			cmp.Or(param.Name(), fmt.Sprintf("p%d", i)),
+			names[i],
 			types.TypeString(param.Type(), qualifier),
 		))
 	}
 	b.WriteString("\n")
 	return b.String()
+}
+
+func paramnames(tup *types.Tuple) []string {
+	names := make([]string, 0, tup.Len())
+	for i := range tup.Len() {
+		v := tup.At(i)
+		var name string
+		if v.Name() == "" {
+			name = fmt.Sprintf("P%d", i)
+		} else {
+			name = capitalize(v.Name())
+		}
+		for slices.Contains(names, name) {
+			name = name + "_"
+		}
+		names = append(names, name)
+	}
+	return names
+}
+
+func resultnames(tup *types.Tuple) []string {
+	names := make([]string, 0, tup.Len())
+	for i := range tup.Len() {
+		v := tup.At(i)
+		var name string
+		if v.Name() == "" {
+			name = fmt.Sprintf("r%d", i)
+		} else if v.Name() == "error" {
+			// Fix a common type shadowing error.
+			name = "err"
+		} else {
+			name = v.Name()
+		}
+		for slices.Contains(names, name) {
+			name = name + "_"
+		}
+		names = append(names, name)
+	}
+	return names
 }
 
 func ternary[T any](cond bool, t, f T) T {
@@ -379,4 +407,9 @@ func keys[M ~map[K]V, K cmp.Ordered, V any](m M) []K {
 	}
 	slices.Sort(r)
 	return r
+}
+
+func capitalize(s string) string {
+	runes := []rune(s)
+	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
 }

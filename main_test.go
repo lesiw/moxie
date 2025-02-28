@@ -8,6 +8,8 @@ import (
 	"lesiw.io/cmdio/sys"
 )
 
+var rnr = sys.Runner()
+
 func TestMoxie(t *testing.T) {
 	if err := os.Chdir("internal/testdata/"); err != nil {
 		t.Fatalf("failed to change directory: %s", err)
@@ -24,7 +26,7 @@ func TestMoxie(t *testing.T) {
 	if err := run("M0"); err != nil {
 		t.Fatalf("failed to run moxie: %s", err)
 	}
-	if err := sys.Run("go", "test", "-v", "-shuffle", "on", "."); err != nil {
+	if err := rnr.Run("go", "test", "-v", "-shuffle", "on", "."); err != nil {
 		t.Fatalf("failed to run tests: %s", err)
 	}
 }

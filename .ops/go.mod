@@ -1,8 +1,6 @@
 module ops.invalid
 
-go 1.23.0
-
-toolchain go1.24.0
+go 1.23.6
 
 require (
 	labs.lesiw.io/ops v0.0.0-20250220031357-f371eedb0d12

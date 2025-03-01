@@ -58,8 +58,9 @@ func run(args ...string) error {
 	typename = flags.Args[0]
 
 	cfg := &packages.Config{
-		Mode: packages.NeedTypes | packages.NeedName | packages.NeedTypesInfo,
-		Dir:  ".",
+		Dir:   ".",
+		Mode:  packages.NeedTypes | packages.NeedName | packages.NeedTypesInfo,
+		Tests: true,
 	}
 	pkgs, err := packages.Load(cfg, "./...")
 	if err != nil {

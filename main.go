@@ -72,15 +72,19 @@ func run(args ...string) error {
 			continue
 		}
 		pkgname = pkg.Name
-		return generate(obj.Type())
+		return generate(pkg.Types, obj.Type())
 	}
 	return fmt.Errorf("bad type: %s", typename)
 }
 
-func generate(typ types.Type) error {
+func generate(pkg *types.Package, typ types.Type) error {
 	ntype, ok := typ.(*types.Named)
 	if !ok {
 		return fmt.Errorf("could not get name of type '%s'", typ)
+	}
+	st, ok := ntype.Underlying().(*types.Struct)
+	if !ok {
+		return errors.New("type is not a struct")
 	}
 	tname := ntype.Obj().Name()
 	fname := "mock_" + snakecase(tname) + "_test.go"
@@ -142,14 +146,17 @@ func generate(typ types.Type) error {
 		if !sel.Obj().Exported() {
 			continue
 		}
-		origin := types.TypeString(
-			sel.Obj().(*types.Func).Origin().Type().(*types.Signature).
-				Recv().Type(),
-			func(p *types.Package) string { return "" },
-		)
-		origin = strings.TrimLeft(origin, "*")
 		tsig := sel.Obj().Type().(*types.Signature)
 		mname := sel.Obj().Name()
+		obj, idx, _ := types.LookupFieldOrMethod(typ, true, pkg, mname)
+		var callorig string
+		if obj != nil {
+			callorig = fmt.Sprintf(
+				" else {\n\t\t_fn = _recv.%s.%s\n\t}",
+				st.Field(idx[0]).Name(),
+				mname,
+			)
+		}
 		out.WriteString(
 			fmt.Sprintf(
 				fn,
@@ -157,7 +164,7 @@ func generate(typ types.Type) error {
 				mname,
 				sig(sel),
 				args(tsig.Params(), tsig.Variadic()),
-				origin,
+				callorig,
 				args(tsig.Params(), false),
 				argtypes(tsig.Params(), tsig.Variadic()),
 				resultparams(tsig.Results()),

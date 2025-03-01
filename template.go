@@ -53,7 +53,7 @@ const calltype = `type _%[1]s_%[2]s_Call struct {%[3]s}
 // 2: method name
 // 3: method signature
 // 4: arguments
-// 5: origin type
+// 5: _fn = original function, if one exists
 // 6: call arguments
 // 7: parameter types
 // 8: result parameters
@@ -70,13 +70,13 @@ func (_recv *%[1]s) %[3]s {
 	_dat := _%[1]sPtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.%[2]sCalls = append(_dat.%[2]sCalls, _%[1]s_%[2]s_Call{%[6]s})
-	_fn := _recv.%[5]s.%[2]s
+	var _fn func(%[7]s) (%[9]s)
 	if len(_dat.%[2]sMocks) > 0 {
 		_fn = _dat.%[2]sMocks[0]
 		if len(_dat.%[2]sMocks) > 1 {
 			_dat.%[2]sMocks = _dat.%[2]sMocks[1:]
 		}
-	}
+	}%[5]s
 	_dat.mutex.Unlock()
 	%[11]s_fn(%[4]s)
 }

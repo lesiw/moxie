@@ -1,9 +1,14 @@
 package pkg
 
+import "io"
+
 // The type under test cannot be the empty struct.
 // Empty structs are subject to special optimization and may return the same
 // pointer receiver between different tests.
-type T0 struct{ _ bool }
+type T0 struct {
+	_             bool
+	io.ReadWriter // Double interface embed.
+}
 
 type String string
 type Int int

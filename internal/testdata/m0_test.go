@@ -89,3 +89,9 @@ func TestCalls(t *testing.T) {
 		t.Errorf("M0._OneParamNoResult_Calls():\n%s", cmp.Diff(want, got, opt))
 	}
 }
+
+func TestInterface(t *testing.T) {
+	var m0 M0
+	m0._Read_Stub()
+	_, _ = m0.Read(nil) // Validate this does not panic.
+}

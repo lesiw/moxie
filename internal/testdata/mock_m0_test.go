@@ -44,6 +44,8 @@ type _M0Data struct {
 	OneParamTwoResultsCalls []_M0_OneParamTwoResults_Call
 	OneResultMocks []func() error
 	OneResultCalls []_M0_OneResult_Call
+	ReadMocks []func(p []byte) (n int, err error)
+	ReadCalls []_M0_Read_Call
 	SimpleMocks []func()
 	SimpleCalls []_M0_Simple_Call
 	TwoNamedResultsMocks []func() (n pkg.Int, err error)
@@ -62,6 +64,8 @@ type _M0Data struct {
 	VariadicOneResultCalls []_M0_VariadicOneResult_Call
 	VariadicTwoResultsMocks []func(...pkg.String) (pkg.Int, error)
 	VariadicTwoResultsCalls []_M0_VariadicTwoResults_Call
+	WriteMocks []func(p []byte) (n int, err error)
+	WriteCalls []_M0_Write_Call
 }
 
 func _M0PtrData(t *M0) *_M0Data {
@@ -121,6 +125,9 @@ type _M0_OneParamTwoResults_Call struct {
 	P0 pkg.String
 }
 type _M0_OneResult_Call struct {}
+type _M0_Read_Call struct {
+	P []byte
+}
 type _M0_Simple_Call struct {}
 type _M0_TwoNamedResults_Call struct {}
 type _M0_TwoParamsNoResult_Call struct {
@@ -145,6 +152,9 @@ type _M0_VariadicOneResult_Call struct {
 type _M0_VariadicTwoResults_Call struct {
 	P0 []pkg.String
 }
+type _M0_Write_Call struct {
+	P []byte
+}
 
 func (_recv *M0) AllNamedIdentifiers(x pkg.String, y ...pkg.String) (pkg.Int, error) {
 	if _recv == nil {
@@ -153,12 +163,14 @@ func (_recv *M0) AllNamedIdentifiers(x pkg.String, y ...pkg.String) (pkg.Int, er
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.AllNamedIdentifiersCalls = append(_dat.AllNamedIdentifiersCalls, _M0_AllNamedIdentifiers_Call{x, y})
-	_fn := _recv.T0.AllNamedIdentifiers
+	var _fn func(pkg.String, ...pkg.String) (pkg.Int, error)
 	if len(_dat.AllNamedIdentifiersMocks) > 0 {
 		_fn = _dat.AllNamedIdentifiersMocks[0]
 		if len(_dat.AllNamedIdentifiersMocks) > 1 {
 			_dat.AllNamedIdentifiersMocks = _dat.AllNamedIdentifiersMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.AllNamedIdentifiers
 	}
 	_dat.mutex.Unlock()
 	return _fn(x, y...)
@@ -211,12 +223,14 @@ func (_recv *M0) MixedNoResult(P0 pkg.String, P1 ...pkg.String) {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.MixedNoResultCalls = append(_dat.MixedNoResultCalls, _M0_MixedNoResult_Call{P0, P1})
-	_fn := _recv.T0.MixedNoResult
+	var _fn func(pkg.String, ...pkg.String) ()
 	if len(_dat.MixedNoResultMocks) > 0 {
 		_fn = _dat.MixedNoResultMocks[0]
 		if len(_dat.MixedNoResultMocks) > 1 {
 			_dat.MixedNoResultMocks = _dat.MixedNoResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.MixedNoResult
 	}
 	_dat.mutex.Unlock()
 	_fn(P0, P1...)
@@ -269,12 +283,14 @@ func (_recv *M0) MixedOneResult(P0 pkg.String, P1 ...pkg.String) error {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.MixedOneResultCalls = append(_dat.MixedOneResultCalls, _M0_MixedOneResult_Call{P0, P1})
-	_fn := _recv.T0.MixedOneResult
+	var _fn func(pkg.String, ...pkg.String) (error)
 	if len(_dat.MixedOneResultMocks) > 0 {
 		_fn = _dat.MixedOneResultMocks[0]
 		if len(_dat.MixedOneResultMocks) > 1 {
 			_dat.MixedOneResultMocks = _dat.MixedOneResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.MixedOneResult
 	}
 	_dat.mutex.Unlock()
 	return _fn(P0, P1...)
@@ -327,12 +343,14 @@ func (_recv *M0) MixedTwoResults(P0 pkg.String, P1 ...pkg.String) (pkg.Int, erro
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.MixedTwoResultsCalls = append(_dat.MixedTwoResultsCalls, _M0_MixedTwoResults_Call{P0, P1})
-	_fn := _recv.T0.MixedTwoResults
+	var _fn func(pkg.String, ...pkg.String) (pkg.Int, error)
 	if len(_dat.MixedTwoResultsMocks) > 0 {
 		_fn = _dat.MixedTwoResultsMocks[0]
 		if len(_dat.MixedTwoResultsMocks) > 1 {
 			_dat.MixedTwoResultsMocks = _dat.MixedTwoResultsMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.MixedTwoResults
 	}
 	_dat.mutex.Unlock()
 	return _fn(P0, P1...)
@@ -385,12 +403,14 @@ func (_recv *M0) NamedMixedNoResult(x pkg.String, y ...pkg.String) {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.NamedMixedNoResultCalls = append(_dat.NamedMixedNoResultCalls, _M0_NamedMixedNoResult_Call{x, y})
-	_fn := _recv.T0.NamedMixedNoResult
+	var _fn func(pkg.String, ...pkg.String) ()
 	if len(_dat.NamedMixedNoResultMocks) > 0 {
 		_fn = _dat.NamedMixedNoResultMocks[0]
 		if len(_dat.NamedMixedNoResultMocks) > 1 {
 			_dat.NamedMixedNoResultMocks = _dat.NamedMixedNoResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.NamedMixedNoResult
 	}
 	_dat.mutex.Unlock()
 	_fn(x, y...)
@@ -443,12 +463,14 @@ func (_recv *M0) NamedMixedOneResult(x pkg.String, y ...pkg.String) error {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.NamedMixedOneResultCalls = append(_dat.NamedMixedOneResultCalls, _M0_NamedMixedOneResult_Call{x, y})
-	_fn := _recv.T0.NamedMixedOneResult
+	var _fn func(pkg.String, ...pkg.String) (error)
 	if len(_dat.NamedMixedOneResultMocks) > 0 {
 		_fn = _dat.NamedMixedOneResultMocks[0]
 		if len(_dat.NamedMixedOneResultMocks) > 1 {
 			_dat.NamedMixedOneResultMocks = _dat.NamedMixedOneResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.NamedMixedOneResult
 	}
 	_dat.mutex.Unlock()
 	return _fn(x, y...)
@@ -501,12 +523,14 @@ func (_recv *M0) NamedMixedTwoResults(x pkg.String, y ...pkg.String) (pkg.Int, e
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.NamedMixedTwoResultsCalls = append(_dat.NamedMixedTwoResultsCalls, _M0_NamedMixedTwoResults_Call{x, y})
-	_fn := _recv.T0.NamedMixedTwoResults
+	var _fn func(pkg.String, ...pkg.String) (pkg.Int, error)
 	if len(_dat.NamedMixedTwoResultsMocks) > 0 {
 		_fn = _dat.NamedMixedTwoResultsMocks[0]
 		if len(_dat.NamedMixedTwoResultsMocks) > 1 {
 			_dat.NamedMixedTwoResultsMocks = _dat.NamedMixedTwoResultsMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.NamedMixedTwoResults
 	}
 	_dat.mutex.Unlock()
 	return _fn(x, y...)
@@ -559,12 +583,14 @@ func (_recv *M0) NamedParamNoResult(x pkg.String) {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.NamedParamNoResultCalls = append(_dat.NamedParamNoResultCalls, _M0_NamedParamNoResult_Call{x})
-	_fn := _recv.T0.NamedParamNoResult
+	var _fn func(pkg.String) ()
 	if len(_dat.NamedParamNoResultMocks) > 0 {
 		_fn = _dat.NamedParamNoResultMocks[0]
 		if len(_dat.NamedParamNoResultMocks) > 1 {
 			_dat.NamedParamNoResultMocks = _dat.NamedParamNoResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.NamedParamNoResult
 	}
 	_dat.mutex.Unlock()
 	_fn(x)
@@ -617,12 +643,14 @@ func (_recv *M0) NamedParamOneResult(x pkg.String) error {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.NamedParamOneResultCalls = append(_dat.NamedParamOneResultCalls, _M0_NamedParamOneResult_Call{x})
-	_fn := _recv.T0.NamedParamOneResult
+	var _fn func(pkg.String) (error)
 	if len(_dat.NamedParamOneResultMocks) > 0 {
 		_fn = _dat.NamedParamOneResultMocks[0]
 		if len(_dat.NamedParamOneResultMocks) > 1 {
 			_dat.NamedParamOneResultMocks = _dat.NamedParamOneResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.NamedParamOneResult
 	}
 	_dat.mutex.Unlock()
 	return _fn(x)
@@ -675,12 +703,14 @@ func (_recv *M0) NamedParamTwoResults(x pkg.String) (pkg.Int, error) {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.NamedParamTwoResultsCalls = append(_dat.NamedParamTwoResultsCalls, _M0_NamedParamTwoResults_Call{x})
-	_fn := _recv.T0.NamedParamTwoResults
+	var _fn func(pkg.String) (pkg.Int, error)
 	if len(_dat.NamedParamTwoResultsMocks) > 0 {
 		_fn = _dat.NamedParamTwoResultsMocks[0]
 		if len(_dat.NamedParamTwoResultsMocks) > 1 {
 			_dat.NamedParamTwoResultsMocks = _dat.NamedParamTwoResultsMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.NamedParamTwoResults
 	}
 	_dat.mutex.Unlock()
 	return _fn(x)
@@ -733,12 +763,14 @@ func (_recv *M0) OneNamedResult() error {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.OneNamedResultCalls = append(_dat.OneNamedResultCalls, _M0_OneNamedResult_Call{})
-	_fn := _recv.T0.OneNamedResult
+	var _fn func() (error)
 	if len(_dat.OneNamedResultMocks) > 0 {
 		_fn = _dat.OneNamedResultMocks[0]
 		if len(_dat.OneNamedResultMocks) > 1 {
 			_dat.OneNamedResultMocks = _dat.OneNamedResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.OneNamedResult
 	}
 	_dat.mutex.Unlock()
 	return _fn()
@@ -791,12 +823,14 @@ func (_recv *M0) OneParamNoResult(P0 pkg.String) {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.OneParamNoResultCalls = append(_dat.OneParamNoResultCalls, _M0_OneParamNoResult_Call{P0})
-	_fn := _recv.T0.OneParamNoResult
+	var _fn func(pkg.String) ()
 	if len(_dat.OneParamNoResultMocks) > 0 {
 		_fn = _dat.OneParamNoResultMocks[0]
 		if len(_dat.OneParamNoResultMocks) > 1 {
 			_dat.OneParamNoResultMocks = _dat.OneParamNoResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.OneParamNoResult
 	}
 	_dat.mutex.Unlock()
 	_fn(P0)
@@ -849,12 +883,14 @@ func (_recv *M0) OneParamOneResult(P0 pkg.String) error {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.OneParamOneResultCalls = append(_dat.OneParamOneResultCalls, _M0_OneParamOneResult_Call{P0})
-	_fn := _recv.T0.OneParamOneResult
+	var _fn func(pkg.String) (error)
 	if len(_dat.OneParamOneResultMocks) > 0 {
 		_fn = _dat.OneParamOneResultMocks[0]
 		if len(_dat.OneParamOneResultMocks) > 1 {
 			_dat.OneParamOneResultMocks = _dat.OneParamOneResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.OneParamOneResult
 	}
 	_dat.mutex.Unlock()
 	return _fn(P0)
@@ -907,12 +943,14 @@ func (_recv *M0) OneParamTwoResults(P0 pkg.String) (pkg.Int, error) {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.OneParamTwoResultsCalls = append(_dat.OneParamTwoResultsCalls, _M0_OneParamTwoResults_Call{P0})
-	_fn := _recv.T0.OneParamTwoResults
+	var _fn func(pkg.String) (pkg.Int, error)
 	if len(_dat.OneParamTwoResultsMocks) > 0 {
 		_fn = _dat.OneParamTwoResultsMocks[0]
 		if len(_dat.OneParamTwoResultsMocks) > 1 {
 			_dat.OneParamTwoResultsMocks = _dat.OneParamTwoResultsMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.OneParamTwoResults
 	}
 	_dat.mutex.Unlock()
 	return _fn(P0)
@@ -965,12 +1003,14 @@ func (_recv *M0) OneResult() error {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.OneResultCalls = append(_dat.OneResultCalls, _M0_OneResult_Call{})
-	_fn := _recv.T0.OneResult
+	var _fn func() (error)
 	if len(_dat.OneResultMocks) > 0 {
 		_fn = _dat.OneResultMocks[0]
 		if len(_dat.OneResultMocks) > 1 {
 			_dat.OneResultMocks = _dat.OneResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.OneResult
 	}
 	_dat.mutex.Unlock()
 	return _fn()
@@ -1016,6 +1056,66 @@ func (_recv *M0) _OneResult_Calls() []_M0_OneResult_Call {
 	return _dat.OneResultCalls
 }
 
+func (_recv *M0) Read(p []byte) (int, error) {
+	if _recv == nil {
+		panic("M0.Read: nil pointer receiver")
+	}
+	_dat := _M0PtrData(_recv)
+	_dat.mutex.Lock()
+	_dat.ReadCalls = append(_dat.ReadCalls, _M0_Read_Call{p})
+	var _fn func([]byte) (int, error)
+	if len(_dat.ReadMocks) > 0 {
+		_fn = _dat.ReadMocks[0]
+		if len(_dat.ReadMocks) > 1 {
+			_dat.ReadMocks = _dat.ReadMocks[1:]
+		}
+	} else {
+		_fn = _recv.T0.Read
+	}
+	_dat.mutex.Unlock()
+	return _fn(p)
+}
+
+func (_recv *M0) _Read_Do(fn func([]byte) (int, error)) {
+	if _recv == nil {
+		panic("M0.Read: nil pointer receiver")
+	}
+	_dat := _M0PtrData(_recv)
+	defer _dat.mutex.Unlock()
+	_dat.mutex.Lock()
+	if fn == nil {
+		_dat.ReadMocks = []func([]byte) (int, error){}
+	} else if len(_dat.ReadMocks) < 2 {
+		_dat.ReadMocks = []func([]byte) (int, error){fn, fn}
+	} else {
+		_dat.ReadMocks = _dat.ReadMocks[:len(_dat.ReadMocks)-1]
+		_dat.ReadMocks = append(_dat.ReadMocks, fn)
+		_dat.ReadMocks = append(_dat.ReadMocks, fn)
+	}
+}
+
+func (_recv *M0) _Read_Stub() {
+	_recv._Read_Do(func([]byte) (n int, err error) {
+		return n, err
+	})
+}
+
+func (_recv *M0) _Read_Return(n int, err error) {
+	_recv._Read_Do(func([]byte) (int, error) {
+		return n, err
+	})
+}
+
+func (_recv *M0) _Read_Calls() []_M0_Read_Call {
+	if _recv == nil {
+		panic("M0.Read: nil pointer receiver")
+	}
+	_dat := _M0PtrData(_recv)
+	defer _dat.mutex.Unlock()
+	_dat.mutex.Lock()
+	return _dat.ReadCalls
+}
+
 func (_recv *M0) Simple() {
 	if _recv == nil {
 		panic("M0.Simple: nil pointer receiver")
@@ -1023,12 +1123,14 @@ func (_recv *M0) Simple() {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.SimpleCalls = append(_dat.SimpleCalls, _M0_Simple_Call{})
-	_fn := _recv.T0.Simple
+	var _fn func() ()
 	if len(_dat.SimpleMocks) > 0 {
 		_fn = _dat.SimpleMocks[0]
 		if len(_dat.SimpleMocks) > 1 {
 			_dat.SimpleMocks = _dat.SimpleMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.Simple
 	}
 	_dat.mutex.Unlock()
 	_fn()
@@ -1081,12 +1183,14 @@ func (_recv *M0) TwoNamedResults() (pkg.Int, error) {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.TwoNamedResultsCalls = append(_dat.TwoNamedResultsCalls, _M0_TwoNamedResults_Call{})
-	_fn := _recv.T0.TwoNamedResults
+	var _fn func() (pkg.Int, error)
 	if len(_dat.TwoNamedResultsMocks) > 0 {
 		_fn = _dat.TwoNamedResultsMocks[0]
 		if len(_dat.TwoNamedResultsMocks) > 1 {
 			_dat.TwoNamedResultsMocks = _dat.TwoNamedResultsMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.TwoNamedResults
 	}
 	_dat.mutex.Unlock()
 	return _fn()
@@ -1139,12 +1243,14 @@ func (_recv *M0) TwoParamsNoResult(P0 pkg.String, P1 pkg.String) {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.TwoParamsNoResultCalls = append(_dat.TwoParamsNoResultCalls, _M0_TwoParamsNoResult_Call{P0, P1})
-	_fn := _recv.T0.TwoParamsNoResult
+	var _fn func(pkg.String, pkg.String) ()
 	if len(_dat.TwoParamsNoResultMocks) > 0 {
 		_fn = _dat.TwoParamsNoResultMocks[0]
 		if len(_dat.TwoParamsNoResultMocks) > 1 {
 			_dat.TwoParamsNoResultMocks = _dat.TwoParamsNoResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.TwoParamsNoResult
 	}
 	_dat.mutex.Unlock()
 	_fn(P0, P1)
@@ -1197,12 +1303,14 @@ func (_recv *M0) TwoParamsOneResult(P0 pkg.String, P1 pkg.String) error {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.TwoParamsOneResultCalls = append(_dat.TwoParamsOneResultCalls, _M0_TwoParamsOneResult_Call{P0, P1})
-	_fn := _recv.T0.TwoParamsOneResult
+	var _fn func(pkg.String, pkg.String) (error)
 	if len(_dat.TwoParamsOneResultMocks) > 0 {
 		_fn = _dat.TwoParamsOneResultMocks[0]
 		if len(_dat.TwoParamsOneResultMocks) > 1 {
 			_dat.TwoParamsOneResultMocks = _dat.TwoParamsOneResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.TwoParamsOneResult
 	}
 	_dat.mutex.Unlock()
 	return _fn(P0, P1)
@@ -1255,12 +1363,14 @@ func (_recv *M0) TwoParamsTwoResults(P0 pkg.String, P1 pkg.String) (pkg.Int, err
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.TwoParamsTwoResultsCalls = append(_dat.TwoParamsTwoResultsCalls, _M0_TwoParamsTwoResults_Call{P0, P1})
-	_fn := _recv.T0.TwoParamsTwoResults
+	var _fn func(pkg.String, pkg.String) (pkg.Int, error)
 	if len(_dat.TwoParamsTwoResultsMocks) > 0 {
 		_fn = _dat.TwoParamsTwoResultsMocks[0]
 		if len(_dat.TwoParamsTwoResultsMocks) > 1 {
 			_dat.TwoParamsTwoResultsMocks = _dat.TwoParamsTwoResultsMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.TwoParamsTwoResults
 	}
 	_dat.mutex.Unlock()
 	return _fn(P0, P1)
@@ -1313,12 +1423,14 @@ func (_recv *M0) TwoResults() (pkg.Int, error) {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.TwoResultsCalls = append(_dat.TwoResultsCalls, _M0_TwoResults_Call{})
-	_fn := _recv.T0.TwoResults
+	var _fn func() (pkg.Int, error)
 	if len(_dat.TwoResultsMocks) > 0 {
 		_fn = _dat.TwoResultsMocks[0]
 		if len(_dat.TwoResultsMocks) > 1 {
 			_dat.TwoResultsMocks = _dat.TwoResultsMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.TwoResults
 	}
 	_dat.mutex.Unlock()
 	return _fn()
@@ -1371,12 +1483,14 @@ func (_recv *M0) VariadicNoResult(P0 ...pkg.String) {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.VariadicNoResultCalls = append(_dat.VariadicNoResultCalls, _M0_VariadicNoResult_Call{P0})
-	_fn := _recv.T0.VariadicNoResult
+	var _fn func(...pkg.String) ()
 	if len(_dat.VariadicNoResultMocks) > 0 {
 		_fn = _dat.VariadicNoResultMocks[0]
 		if len(_dat.VariadicNoResultMocks) > 1 {
 			_dat.VariadicNoResultMocks = _dat.VariadicNoResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.VariadicNoResult
 	}
 	_dat.mutex.Unlock()
 	_fn(P0...)
@@ -1429,12 +1543,14 @@ func (_recv *M0) VariadicOneResult(P0 ...pkg.String) error {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.VariadicOneResultCalls = append(_dat.VariadicOneResultCalls, _M0_VariadicOneResult_Call{P0})
-	_fn := _recv.T0.VariadicOneResult
+	var _fn func(...pkg.String) (error)
 	if len(_dat.VariadicOneResultMocks) > 0 {
 		_fn = _dat.VariadicOneResultMocks[0]
 		if len(_dat.VariadicOneResultMocks) > 1 {
 			_dat.VariadicOneResultMocks = _dat.VariadicOneResultMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.VariadicOneResult
 	}
 	_dat.mutex.Unlock()
 	return _fn(P0...)
@@ -1487,12 +1603,14 @@ func (_recv *M0) VariadicTwoResults(P0 ...pkg.String) (pkg.Int, error) {
 	_dat := _M0PtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.VariadicTwoResultsCalls = append(_dat.VariadicTwoResultsCalls, _M0_VariadicTwoResults_Call{P0})
-	_fn := _recv.T0.VariadicTwoResults
+	var _fn func(...pkg.String) (pkg.Int, error)
 	if len(_dat.VariadicTwoResultsMocks) > 0 {
 		_fn = _dat.VariadicTwoResultsMocks[0]
 		if len(_dat.VariadicTwoResultsMocks) > 1 {
 			_dat.VariadicTwoResultsMocks = _dat.VariadicTwoResultsMocks[1:]
 		}
+	} else {
+		_fn = _recv.T0.VariadicTwoResults
 	}
 	_dat.mutex.Unlock()
 	return _fn(P0...)
@@ -1536,4 +1654,64 @@ func (_recv *M0) _VariadicTwoResults_Calls() []_M0_VariadicTwoResults_Call {
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	return _dat.VariadicTwoResultsCalls
+}
+
+func (_recv *M0) Write(p []byte) (int, error) {
+	if _recv == nil {
+		panic("M0.Write: nil pointer receiver")
+	}
+	_dat := _M0PtrData(_recv)
+	_dat.mutex.Lock()
+	_dat.WriteCalls = append(_dat.WriteCalls, _M0_Write_Call{p})
+	var _fn func([]byte) (int, error)
+	if len(_dat.WriteMocks) > 0 {
+		_fn = _dat.WriteMocks[0]
+		if len(_dat.WriteMocks) > 1 {
+			_dat.WriteMocks = _dat.WriteMocks[1:]
+		}
+	} else {
+		_fn = _recv.T0.Write
+	}
+	_dat.mutex.Unlock()
+	return _fn(p)
+}
+
+func (_recv *M0) _Write_Do(fn func([]byte) (int, error)) {
+	if _recv == nil {
+		panic("M0.Write: nil pointer receiver")
+	}
+	_dat := _M0PtrData(_recv)
+	defer _dat.mutex.Unlock()
+	_dat.mutex.Lock()
+	if fn == nil {
+		_dat.WriteMocks = []func([]byte) (int, error){}
+	} else if len(_dat.WriteMocks) < 2 {
+		_dat.WriteMocks = []func([]byte) (int, error){fn, fn}
+	} else {
+		_dat.WriteMocks = _dat.WriteMocks[:len(_dat.WriteMocks)-1]
+		_dat.WriteMocks = append(_dat.WriteMocks, fn)
+		_dat.WriteMocks = append(_dat.WriteMocks, fn)
+	}
+}
+
+func (_recv *M0) _Write_Stub() {
+	_recv._Write_Do(func([]byte) (n int, err error) {
+		return n, err
+	})
+}
+
+func (_recv *M0) _Write_Return(n int, err error) {
+	_recv._Write_Do(func([]byte) (int, error) {
+		return n, err
+	})
+}
+
+func (_recv *M0) _Write_Calls() []_M0_Write_Call {
+	if _recv == nil {
+		panic("M0.Write: nil pointer receiver")
+	}
+	_dat := _M0PtrData(_recv)
+	defer _dat.mutex.Unlock()
+	_dat.mutex.Lock()
+	return _dat.WriteCalls
 }

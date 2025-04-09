@@ -23,6 +23,7 @@ var (
 	imports  = map[string]string{
 		"runtime": "runtime",
 		"sync":    "sync",
+		"testing": "testing",
 		"unsafe":  "unsafe",
 	}
 
@@ -332,7 +333,11 @@ func importblock() string {
 		if name == "" {
 			continue
 		}
-		b.WriteString(fmt.Sprintf("\t%s \"%s\"\n", name, path))
+		if name == path {
+			b.WriteString(fmt.Sprintf("\t\"%s\"\n", name))
+		} else {
+			b.WriteString(fmt.Sprintf("\t%s \"%s\"\n", name, path))
+		}
 	}
 	b.WriteString(")")
 

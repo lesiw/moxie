@@ -31,9 +31,12 @@ const funcinfo = `	%[2]sMocks []func%[3]s
 const headerend = `}
 
 func _%[1]sPtrData(t *%[1]s) *_%[1]sData {
-	ptr := uintptr(unsafe.Pointer(t))
+	var ptr uintptr
+	if t != nil {
+		ptr = uintptr(unsafe.Pointer(t))
+	}
 	val, loaded := _%[1]s.LoadOrStore(ptr, new(_%[1]sData))
-	if !loaded {
+	if !loaded && t != nil {
 		val.(*_%[1]sData).once.Do(func() { runtime.SetFinalizer(t, func(_ *%[1]s) { _%[1]s.Delete(ptr) })})
 	}
 	return val.(*_%[1]sData)
@@ -70,14 +73,23 @@ func (_recv *%[1]s) %[3]s {
 	_dat := _%[1]sPtrData(_recv)
 	_dat.mutex.Lock()
 	_dat.%[2]sCalls = append(_dat.%[2]sCalls, _%[1]s_%[2]s_Call{%[6]s})
+	_all := _%[1]sPtrData(nil)
+	_all.mutex.Lock()
+	_all.%[2]sCalls = append(_all.%[2]sCalls, _%[1]s_%[2]s_Call{%[6]s})
 	var _fn func(%[7]s) (%[9]s)
 	if len(_dat.%[2]sMocks) > 0 {
 		_fn = _dat.%[2]sMocks[0]
 		if len(_dat.%[2]sMocks) > 1 {
 			_dat.%[2]sMocks = _dat.%[2]sMocks[1:]
 		}
+	} else if len(_all.%[2]sMocks) > 0 {
+		_fn = _all.%[2]sMocks[0]
+		if len(_all.%[2]sMocks) > 1 {
+			_all.%[2]sMocks = _all.%[2]sMocks[1:]
+		}
 	}%[5]s
 	_dat.mutex.Unlock()
+	_all.mutex.Unlock()
 	%[11]s_fn(%[4]s)
 }
 
@@ -99,16 +111,43 @@ func (_recv *%[1]s) _%[2]s_Do(fn func(%[7]s) (%[9]s)) {
 	}
 }
 
-func (_recv *%[1]s) _%[2]s_Stub() {
-	_recv._%[2]s_Do(func(%[7]s) (%[8]s) {
-		return %[10]s
+func (%[1]s) _%[2]s_DoAll(t *testing.T, fn func(%[7]s) (%[9]s)) {
+	_dat := _%[1]sPtrData(nil)
+	defer _dat.mutex.Unlock()
+	_dat.mutex.Lock()
+	if fn == nil {
+		_dat.%[2]sMocks = []func(%[7]s) (%[9]s){}
+	} else if len(_dat.%[2]sMocks) < 2 {
+		_dat.%[2]sMocks = []func(%[7]s) (%[9]s){fn, fn}
+	} else {
+		_dat.%[2]sMocks = _dat.%[2]sMocks[:len(_dat.%[2]sMocks)-1]
+		_dat.%[2]sMocks = append(_dat.%[2]sMocks, fn)
+		_dat.%[2]sMocks = append(_dat.%[2]sMocks, fn)
+	}
+	_dat.once.Do(func() {
+		t.Cleanup(func() {
+			defer _dat.mutex.Unlock()
+			_dat.mutex.Lock()
+			_dat.%[2]sMocks = []func(%[7]s) (%[9]s){}
+			_dat.once = sync.Once{}
+		})
 	})
 }
 
+func (_recv *%[1]s) _%[2]s_Stub() {
+	_recv._%[2]s_Do(func(%[7]s) (%[8]s) { return })
+}
+
+func (%[1]s) _%[2]s_StubAll(t *testing.T) {
+	new(%[1]s)._%[2]s_DoAll(t, func(%[7]s) (%[8]s) { return })
+}
+
 func (_recv *%[1]s) _%[2]s_Return(%[8]s) {
-	_recv._%[2]s_Do(func(%[7]s) (%[9]s) {
-		return %[10]s
-	})
+	_recv._%[2]s_Do(func(%[7]s) (%[9]s) { return %[10]s })
+}
+
+func (%[1]s) _%[2]s_ReturnAll(t *testing.T, %[8]s) {
+	new(%[1]s)._%[2]s_DoAll(t, func(%[7]s) (%[9]s) { return %[10]s })
 }
 
 func (_recv *%[1]s) _%[2]s_Calls() []_%[1]s_%[2]s_Call {
@@ -120,4 +159,19 @@ func (_recv *%[1]s) _%[2]s_Calls() []_%[1]s_%[2]s_Call {
 	_dat.mutex.Lock()
 	return _dat.%[2]sCalls
 }
+
+func (%[1]s) _%[2]s_AllCalls() []_%[1]s_%[2]s_Call {
+	_dat := _%[1]sPtrData(nil)
+	defer _dat.mutex.Unlock()
+	_dat.mutex.Lock()
+	return _dat.%[2]sCalls
+}
+
+func (%[1]s) _%[2]s_ResetAllCalls() {
+	_dat := _%[1]sPtrData(nil)
+	defer _dat.mutex.Unlock()
+	_dat.mutex.Lock()
+	_dat.%[2]sCalls = []_%[1]s_%[2]s_Call{}
+}
+
 `

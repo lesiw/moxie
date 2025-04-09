@@ -48,11 +48,11 @@ func TestOneResult(t *testing.T) {
 	want := errors.New("error result")
 	m0._OneResult_Return(want)
 	if got := m0.OneResult(); want != got {
-		t.Errorf("M0.OneResult() call #1: want %q, got %q", want, got)
+		t.Errorf("M0.OneResult() call #1: want %v, got %v", want, got)
 	}
 	// Calling a second time should return the same result.
 	if got := m0.OneResult(); want != got {
-		t.Errorf("M0.OneResult() call #2: want %q, got %q", want, got)
+		t.Errorf("M0.OneResult() call #2: want %v, got %v", want, got)
 	}
 }
 
@@ -63,13 +63,13 @@ func TestOneResultQueue(t *testing.T) {
 	m0._OneResult_Return(err1)
 	m0._OneResult_Return(err2)
 	if got := m0.OneResult(); err1 != got {
-		t.Errorf("M0.OneResult() call #1: want %q, got %q", err1, got)
+		t.Errorf("M0.OneResult() call #1: want %v, got %v", err1, got)
 	}
 	if got := m0.OneResult(); err2 != got {
-		t.Errorf("M0.OneResult() call #2: want %q, got %q", err1, got)
+		t.Errorf("M0.OneResult() call #2: want %v, got %v", err1, got)
 	}
 	if got := m0.OneResult(); err2 != got {
-		t.Errorf("M0.OneResult() call #3: want %q, got %q", err1, got)
+		t.Errorf("M0.OneResult() call #3: want %v, got %v", err1, got)
 	}
 }
 

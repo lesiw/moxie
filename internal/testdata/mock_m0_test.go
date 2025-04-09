@@ -263,11 +263,16 @@ func (M0) _AllNamedIdentifiers_AllCalls() []_M0_AllNamedIdentifiers_Call {
 	return _dat.AllNamedIdentifiersCalls
 }
 
-func (M0) _AllNamedIdentifiers_ResetAllCalls() {
+func (M0) _AllNamedIdentifiers_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.AllNamedIdentifiersCalls = []_M0_AllNamedIdentifiers_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.AllNamedIdentifiersCalls = []_M0_AllNamedIdentifiers_Call{}
+	})
 }
 
 
@@ -374,11 +379,16 @@ func (M0) _MixedNoResult_AllCalls() []_M0_MixedNoResult_Call {
 	return _dat.MixedNoResultCalls
 }
 
-func (M0) _MixedNoResult_ResetAllCalls() {
+func (M0) _MixedNoResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.MixedNoResultCalls = []_M0_MixedNoResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.MixedNoResultCalls = []_M0_MixedNoResult_Call{}
+	})
 }
 
 
@@ -485,11 +495,16 @@ func (M0) _MixedOneResult_AllCalls() []_M0_MixedOneResult_Call {
 	return _dat.MixedOneResultCalls
 }
 
-func (M0) _MixedOneResult_ResetAllCalls() {
+func (M0) _MixedOneResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.MixedOneResultCalls = []_M0_MixedOneResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.MixedOneResultCalls = []_M0_MixedOneResult_Call{}
+	})
 }
 
 
@@ -596,11 +611,16 @@ func (M0) _MixedTwoResults_AllCalls() []_M0_MixedTwoResults_Call {
 	return _dat.MixedTwoResultsCalls
 }
 
-func (M0) _MixedTwoResults_ResetAllCalls() {
+func (M0) _MixedTwoResults_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.MixedTwoResultsCalls = []_M0_MixedTwoResults_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.MixedTwoResultsCalls = []_M0_MixedTwoResults_Call{}
+	})
 }
 
 
@@ -707,11 +727,16 @@ func (M0) _NamedMixedNoResult_AllCalls() []_M0_NamedMixedNoResult_Call {
 	return _dat.NamedMixedNoResultCalls
 }
 
-func (M0) _NamedMixedNoResult_ResetAllCalls() {
+func (M0) _NamedMixedNoResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.NamedMixedNoResultCalls = []_M0_NamedMixedNoResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.NamedMixedNoResultCalls = []_M0_NamedMixedNoResult_Call{}
+	})
 }
 
 
@@ -818,11 +843,16 @@ func (M0) _NamedMixedOneResult_AllCalls() []_M0_NamedMixedOneResult_Call {
 	return _dat.NamedMixedOneResultCalls
 }
 
-func (M0) _NamedMixedOneResult_ResetAllCalls() {
+func (M0) _NamedMixedOneResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.NamedMixedOneResultCalls = []_M0_NamedMixedOneResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.NamedMixedOneResultCalls = []_M0_NamedMixedOneResult_Call{}
+	})
 }
 
 
@@ -929,11 +959,16 @@ func (M0) _NamedMixedTwoResults_AllCalls() []_M0_NamedMixedTwoResults_Call {
 	return _dat.NamedMixedTwoResultsCalls
 }
 
-func (M0) _NamedMixedTwoResults_ResetAllCalls() {
+func (M0) _NamedMixedTwoResults_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.NamedMixedTwoResultsCalls = []_M0_NamedMixedTwoResults_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.NamedMixedTwoResultsCalls = []_M0_NamedMixedTwoResults_Call{}
+	})
 }
 
 
@@ -1040,11 +1075,16 @@ func (M0) _NamedParamNoResult_AllCalls() []_M0_NamedParamNoResult_Call {
 	return _dat.NamedParamNoResultCalls
 }
 
-func (M0) _NamedParamNoResult_ResetAllCalls() {
+func (M0) _NamedParamNoResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.NamedParamNoResultCalls = []_M0_NamedParamNoResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.NamedParamNoResultCalls = []_M0_NamedParamNoResult_Call{}
+	})
 }
 
 
@@ -1151,11 +1191,16 @@ func (M0) _NamedParamOneResult_AllCalls() []_M0_NamedParamOneResult_Call {
 	return _dat.NamedParamOneResultCalls
 }
 
-func (M0) _NamedParamOneResult_ResetAllCalls() {
+func (M0) _NamedParamOneResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.NamedParamOneResultCalls = []_M0_NamedParamOneResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.NamedParamOneResultCalls = []_M0_NamedParamOneResult_Call{}
+	})
 }
 
 
@@ -1262,11 +1307,16 @@ func (M0) _NamedParamTwoResults_AllCalls() []_M0_NamedParamTwoResults_Call {
 	return _dat.NamedParamTwoResultsCalls
 }
 
-func (M0) _NamedParamTwoResults_ResetAllCalls() {
+func (M0) _NamedParamTwoResults_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.NamedParamTwoResultsCalls = []_M0_NamedParamTwoResults_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.NamedParamTwoResultsCalls = []_M0_NamedParamTwoResults_Call{}
+	})
 }
 
 
@@ -1373,11 +1423,16 @@ func (M0) _OneNamedResult_AllCalls() []_M0_OneNamedResult_Call {
 	return _dat.OneNamedResultCalls
 }
 
-func (M0) _OneNamedResult_ResetAllCalls() {
+func (M0) _OneNamedResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.OneNamedResultCalls = []_M0_OneNamedResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.OneNamedResultCalls = []_M0_OneNamedResult_Call{}
+	})
 }
 
 
@@ -1484,11 +1539,16 @@ func (M0) _OneParamNoResult_AllCalls() []_M0_OneParamNoResult_Call {
 	return _dat.OneParamNoResultCalls
 }
 
-func (M0) _OneParamNoResult_ResetAllCalls() {
+func (M0) _OneParamNoResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.OneParamNoResultCalls = []_M0_OneParamNoResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.OneParamNoResultCalls = []_M0_OneParamNoResult_Call{}
+	})
 }
 
 
@@ -1595,11 +1655,16 @@ func (M0) _OneParamOneResult_AllCalls() []_M0_OneParamOneResult_Call {
 	return _dat.OneParamOneResultCalls
 }
 
-func (M0) _OneParamOneResult_ResetAllCalls() {
+func (M0) _OneParamOneResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.OneParamOneResultCalls = []_M0_OneParamOneResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.OneParamOneResultCalls = []_M0_OneParamOneResult_Call{}
+	})
 }
 
 
@@ -1706,11 +1771,16 @@ func (M0) _OneParamTwoResults_AllCalls() []_M0_OneParamTwoResults_Call {
 	return _dat.OneParamTwoResultsCalls
 }
 
-func (M0) _OneParamTwoResults_ResetAllCalls() {
+func (M0) _OneParamTwoResults_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.OneParamTwoResultsCalls = []_M0_OneParamTwoResults_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.OneParamTwoResultsCalls = []_M0_OneParamTwoResults_Call{}
+	})
 }
 
 
@@ -1817,11 +1887,16 @@ func (M0) _OneResult_AllCalls() []_M0_OneResult_Call {
 	return _dat.OneResultCalls
 }
 
-func (M0) _OneResult_ResetAllCalls() {
+func (M0) _OneResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.OneResultCalls = []_M0_OneResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.OneResultCalls = []_M0_OneResult_Call{}
+	})
 }
 
 
@@ -1928,11 +2003,16 @@ func (M0) _Read_AllCalls() []_M0_Read_Call {
 	return _dat.ReadCalls
 }
 
-func (M0) _Read_ResetAllCalls() {
+func (M0) _Read_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.ReadCalls = []_M0_Read_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.ReadCalls = []_M0_Read_Call{}
+	})
 }
 
 
@@ -2039,11 +2119,16 @@ func (M0) _Simple_AllCalls() []_M0_Simple_Call {
 	return _dat.SimpleCalls
 }
 
-func (M0) _Simple_ResetAllCalls() {
+func (M0) _Simple_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.SimpleCalls = []_M0_Simple_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.SimpleCalls = []_M0_Simple_Call{}
+	})
 }
 
 
@@ -2150,11 +2235,16 @@ func (M0) _TwoNamedResults_AllCalls() []_M0_TwoNamedResults_Call {
 	return _dat.TwoNamedResultsCalls
 }
 
-func (M0) _TwoNamedResults_ResetAllCalls() {
+func (M0) _TwoNamedResults_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.TwoNamedResultsCalls = []_M0_TwoNamedResults_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.TwoNamedResultsCalls = []_M0_TwoNamedResults_Call{}
+	})
 }
 
 
@@ -2261,11 +2351,16 @@ func (M0) _TwoParamsNoResult_AllCalls() []_M0_TwoParamsNoResult_Call {
 	return _dat.TwoParamsNoResultCalls
 }
 
-func (M0) _TwoParamsNoResult_ResetAllCalls() {
+func (M0) _TwoParamsNoResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.TwoParamsNoResultCalls = []_M0_TwoParamsNoResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.TwoParamsNoResultCalls = []_M0_TwoParamsNoResult_Call{}
+	})
 }
 
 
@@ -2372,11 +2467,16 @@ func (M0) _TwoParamsOneResult_AllCalls() []_M0_TwoParamsOneResult_Call {
 	return _dat.TwoParamsOneResultCalls
 }
 
-func (M0) _TwoParamsOneResult_ResetAllCalls() {
+func (M0) _TwoParamsOneResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.TwoParamsOneResultCalls = []_M0_TwoParamsOneResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.TwoParamsOneResultCalls = []_M0_TwoParamsOneResult_Call{}
+	})
 }
 
 
@@ -2483,11 +2583,16 @@ func (M0) _TwoParamsTwoResults_AllCalls() []_M0_TwoParamsTwoResults_Call {
 	return _dat.TwoParamsTwoResultsCalls
 }
 
-func (M0) _TwoParamsTwoResults_ResetAllCalls() {
+func (M0) _TwoParamsTwoResults_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.TwoParamsTwoResultsCalls = []_M0_TwoParamsTwoResults_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.TwoParamsTwoResultsCalls = []_M0_TwoParamsTwoResults_Call{}
+	})
 }
 
 
@@ -2594,11 +2699,16 @@ func (M0) _TwoResults_AllCalls() []_M0_TwoResults_Call {
 	return _dat.TwoResultsCalls
 }
 
-func (M0) _TwoResults_ResetAllCalls() {
+func (M0) _TwoResults_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.TwoResultsCalls = []_M0_TwoResults_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.TwoResultsCalls = []_M0_TwoResults_Call{}
+	})
 }
 
 
@@ -2705,11 +2815,16 @@ func (M0) _VariadicNoResult_AllCalls() []_M0_VariadicNoResult_Call {
 	return _dat.VariadicNoResultCalls
 }
 
-func (M0) _VariadicNoResult_ResetAllCalls() {
+func (M0) _VariadicNoResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.VariadicNoResultCalls = []_M0_VariadicNoResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.VariadicNoResultCalls = []_M0_VariadicNoResult_Call{}
+	})
 }
 
 
@@ -2816,11 +2931,16 @@ func (M0) _VariadicOneResult_AllCalls() []_M0_VariadicOneResult_Call {
 	return _dat.VariadicOneResultCalls
 }
 
-func (M0) _VariadicOneResult_ResetAllCalls() {
+func (M0) _VariadicOneResult_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.VariadicOneResultCalls = []_M0_VariadicOneResult_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.VariadicOneResultCalls = []_M0_VariadicOneResult_Call{}
+	})
 }
 
 
@@ -2927,11 +3047,16 @@ func (M0) _VariadicTwoResults_AllCalls() []_M0_VariadicTwoResults_Call {
 	return _dat.VariadicTwoResultsCalls
 }
 
-func (M0) _VariadicTwoResults_ResetAllCalls() {
+func (M0) _VariadicTwoResults_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.VariadicTwoResultsCalls = []_M0_VariadicTwoResults_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.VariadicTwoResultsCalls = []_M0_VariadicTwoResults_Call{}
+	})
 }
 
 
@@ -3038,10 +3163,15 @@ func (M0) _Write_AllCalls() []_M0_Write_Call {
 	return _dat.WriteCalls
 }
 
-func (M0) _Write_ResetAllCalls() {
+func (M0) _Write_BubbleCalls(t *testing.T) {
 	_dat := _M0PtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.WriteCalls = []_M0_Write_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.WriteCalls = []_M0_Write_Call{}
+	})
 }
 

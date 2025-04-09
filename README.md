@@ -50,7 +50,7 @@ new(T)._Func_DoAll(*testing.T, func() {...}) // when called, run this instead.
                                              // will un-mock the function.
 
 new(T)._Func_AllCalls() []_T_Func_Call // return calls to Func.
-new(T)._Func_ResetAllCalls()           // clear calls.
+new(T)._Func_BubbleCalls(*testing.T)   // clear calls before and after test.
 ```
 
 As above, mocks queue.
@@ -63,8 +63,7 @@ unsafe for use with `t.Parallel()`.
 Methods that accept a `*testing.T` will clean up mocks at the end of their
 corresponding test or subtest.
 
-For tests using `AllCalls()`, it is recommended to `ResetAllCalls()` at the
-start of the test and to register it with `t.Cleanup()`, i.e.
-`t.Cleanup(new(T)._Func_ResetAllCalls)`.
+Tests using `AllCalls()` should also call `new(T)._Func_BubbleCalls(t)`,
+otherwise `AllCalls()` may also contain calls from other tests. 
 
 [embedding]: https://go.dev/doc/effective_go#embedding

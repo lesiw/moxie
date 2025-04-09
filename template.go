@@ -167,11 +167,16 @@ func (%[1]s) _%[2]s_AllCalls() []_%[1]s_%[2]s_Call {
 	return _dat.%[2]sCalls
 }
 
-func (%[1]s) _%[2]s_ResetAllCalls() {
+func (%[1]s) _%[2]s_BubbleCalls(t *testing.T) {
 	_dat := _%[1]sPtrData(nil)
 	defer _dat.mutex.Unlock()
 	_dat.mutex.Lock()
 	_dat.%[2]sCalls = []_%[1]s_%[2]s_Call{}
+	t.Cleanup(func() {
+		defer _dat.mutex.Unlock()
+		_dat.mutex.Lock()
+		_dat.%[2]sCalls = []_%[1]s_%[2]s_Call{}
+	})
 }
 
 `

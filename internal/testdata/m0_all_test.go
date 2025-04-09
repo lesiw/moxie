@@ -91,9 +91,8 @@ func TestOneResultAllQueue(t *testing.T) {
 }
 
 func TestAllCalls(t *testing.T) {
-	new(M0)._OneParamNoResult_ResetAllCalls()
 	t.Run("TestAllCallsSubTest", func(t *testing.T) {
-		t.Cleanup(new(M0)._OneParamNoResult_ResetAllCalls)
+		new(M0)._OneParamNoResult_BubbleCalls(t)
 		new(M0).OneParamNoResult("call one")
 		new(M0).OneParamNoResult("call two")
 		new(M0).OneParamNoResult("call three")

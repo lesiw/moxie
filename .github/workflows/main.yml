@@ -6,4 +6,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
-      - run: '"$(wget -O- lesiw.io/ops | sh)"'
+      - run: '"$(wget -O- lesiw.io/op | sh)"'

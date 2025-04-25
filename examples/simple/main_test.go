@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func Test_Person_with_moxie(t *testing.T) {
+func Test_Company_with_moxie(t *testing.T) {
 	stub := new(StubForWorker)
 	stub._IsWorkingWell_Return(false)
 	company := Company{}

@@ -8,9 +8,11 @@ transparently passed through to embedded types.
 ## Usage
 
 Add this line to your code, where `T` is the type you want to instrument, and
-`E` is the embedded type whose functions you want to intercept.
+`E` is the embedded interface whose functions you want to intercept.
 
 ``` go
+type E interface {}
+
 //go:generate go run lesiw.io/moxie@latest T
 type T struct {
     E

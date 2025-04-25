@@ -9,4 +9,8 @@ type Person struct {
 	Checker
 }
 
+func (p *Person) Check() bool {
+	return true
+}
+
 func main() {}

@@ -7,14 +7,10 @@ import (
 	"lesiw.io/ops"
 )
 
-type Ops struct {
-	goapp.Ops
-}
-
 func main() {
 	goapp.Name = "moxie"
 	if len(os.Args) < 2 {
-		os.Args = append(os.Args, "build")
+		os.Args = append(os.Args, "check")
 	}
-	ops.Handle(Ops{})
+	ops.Handle(goapp.Ops{})
 }

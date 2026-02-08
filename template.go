@@ -27,7 +27,7 @@ const funcinfo = `	%[2]sMocks []func%[3]s
 // offsets
 // 1: type
 //
-//nolint:lll
+//ignore:linelen
 const headerend = `}
 
 func _%[1]sPtrData(t *%[1]s) *_%[1]sData {
@@ -64,7 +64,7 @@ const calltype = `type _%[1]s_%[2]s_Call struct {%[3]s}
 // 10: result arguments
 // 11: "return " if method has return values
 //
-//nolint:lll
+//ignore:linelen
 const fn = `
 func (_recv *%[1]s) %[3]s {
 	if _recv == nil {

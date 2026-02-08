@@ -1,14 +1,24 @@
 package main
 
 import (
+	"context"
 	"os"
 	"path/filepath"
 	"testing"
 
-	"lesiw.io/cmdio/sys"
+	"lesiw.io/command"
+	"lesiw.io/command/sys"
 )
 
-var rnr = sys.Runner()
+func raceEnabled() bool {
+	out, err := sh.Read(
+		context.Background(),
+		"go", "env", "CGO_ENABLED",
+	)
+	return err == nil && out == "1"
+}
+
+var sh = command.Shell(sys.Machine(), "go")
 
 func TestMoxie(t *testing.T) {
 	if err := os.Chdir("internal/testdata/"); err != nil {
@@ -26,7 +36,12 @@ func TestMoxie(t *testing.T) {
 	if err := run("M0"); err != nil {
 		t.Fatalf("failed to run moxie: %s", err)
 	}
-	err = rnr.Run("go", "test", "-v", "-shuffle", "on", "-race", ".")
+	args := []string{"go", "test", "-v", "-shuffle", "on"}
+	if raceEnabled() {
+		args = append(args, "-race")
+	}
+	args = append(args, ".")
+	err = sh.Exec(context.Background(), args...)
 	if err != nil {
 		t.Fatalf("failed to run tests: %s", err)
 	}

@@ -100,8 +100,7 @@ func generate(pkg *types.Package, typ types.Type) error {
 	mset := types.NewMethodSet(typ)
 
 	out.WriteString(fmt.Sprintf(headerstart, pkgname, tname))
-	for i := range mset.Len() {
-		sel := mset.At(i)
+	for sel := range mset.Methods() {
 		if !sel.Obj().Exported() {
 			continue
 		}
@@ -122,8 +121,7 @@ func generate(pkg *types.Package, typ types.Type) error {
 	}
 	out.WriteString(fmt.Sprintf(headerend, tname))
 
-	for i := range mset.Len() {
-		sel := mset.At(i)
+	for sel := range mset.Methods() {
 		if !sel.Obj().Exported() {
 			continue
 		}
@@ -143,8 +141,7 @@ func generate(pkg *types.Package, typ types.Type) error {
 		)
 	}
 
-	for i := range mset.Len() {
-		sel := mset.At(i)
+	for sel := range mset.Methods() {
 		if !sel.Obj().Exported() {
 			continue
 		}

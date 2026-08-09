@@ -38,7 +38,7 @@ func TestMoxie(t *testing.T) {
 		args = append(args, "-race")
 	}
 	args = append(args, ".")
-	err = sh.Exec(context.Background(), args...)
+	err = sh.Exec(t.Context(), args...)
 	if err != nil {
 		t.Fatalf("failed to run tests: %s", err)
 	}

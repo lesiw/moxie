@@ -224,8 +224,10 @@ func sig(sel *types.Selection) string {
 }
 
 func args(tup *types.Tuple, variadic bool) string {
-	var b strings.Builder
-	names := paramnames(tup, false)
+	var (
+		b     strings.Builder
+		names = paramnames(tup, false)
+	)
 	for i := range tup.Len() {
 		if i > 0 {
 			b.WriteString(", ")
@@ -256,8 +258,10 @@ func argtypes(tup *types.Tuple, variadic bool) string {
 }
 
 func resultparams(tup *types.Tuple) string {
-	var b strings.Builder
-	names := resultnames(tup)
+	var (
+		b     strings.Builder
+		names = resultnames(tup)
+	)
 	for i := range tup.Len() {
 		v := tup.At(i)
 		if i > 0 {
@@ -282,8 +286,10 @@ func resulttypes(tup *types.Tuple) string {
 }
 
 func resultargs(tup *types.Tuple) string {
-	var b strings.Builder
-	names := resultnames(tup)
+	var (
+		b     strings.Builder
+		names = resultnames(tup)
+	)
 	for i := range tup.Len() {
 		if i > 0 {
 			b.WriteString(", ")
@@ -356,8 +362,10 @@ func paramfields(sig *types.Signature) string {
 func paramnames(tup *types.Tuple, export bool) []string {
 	names := make([]string, 0, tup.Len())
 	for i := range tup.Len() {
-		v := tup.At(i)
-		var name string
+		var (
+			v    = tup.At(i)
+			name string
+		)
 		if v.Name() == "" {
 			name = fmt.Sprintf("P%d", i)
 		} else {
@@ -377,8 +385,10 @@ func paramnames(tup *types.Tuple, export bool) []string {
 func resultnames(tup *types.Tuple) []string {
 	names := make([]string, 0, tup.Len())
 	for i := range tup.Len() {
-		v := tup.At(i)
-		var name string
+		var (
+			v    = tup.At(i)
+			name string
+		)
 		if v.Name() == "" {
 			name = fmt.Sprintf("r%d", i)
 		} else if v.Name() == "error" {

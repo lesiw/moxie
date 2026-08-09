@@ -4,6 +4,7 @@ import (
 	"cmp"
 	_ "embed"
 	"fmt"
+	"go/format"
 	"go/types"
 	"os"
 	"slices"
@@ -158,9 +159,12 @@ func generate(pkg *types.Package, typ types.Type) error {
 			),
 		)
 	}
-	_, _ = f.WriteString(strings.Replace(out.String(), "import()",
-		importblock(), 1,
-	))
+	src := strings.Replace(out.String(), "import()", importblock(), 1)
+	formatted, err := format.Source([]byte(src))
+	if err != nil {
+		return fmt.Errorf("failed to format generated source: %w", err)
+	}
+	_, _ = f.Write(formatted)
 
 	return nil
 }
@@ -316,17 +320,39 @@ pickname:
 }
 
 func importblock() string {
-	var b strings.Builder
-	b.WriteString("import (\n")
+	var std, ext, local []string
 	for _, path := range keys(imports) {
 		name := imports[path]
 		if name == "" {
 			continue
 		}
+		var line string
 		if name == path {
-			b.WriteString(fmt.Sprintf("\t\"%s\"\n", name))
+			line = fmt.Sprintf("\t%q\n", name)
 		} else {
-			b.WriteString(fmt.Sprintf("\t%s \"%s\"\n", name, path))
+			line = fmt.Sprintf("\t%s %q\n", name, path)
+		}
+		switch {
+		case strings.HasPrefix(path, "lesiw.io/"),
+			strings.HasPrefix(path, "labs.lesiw.io/"):
+			local = append(local, line)
+		case strings.Contains(strings.SplitN(path, "/", 2)[0], "."):
+			ext = append(ext, line)
+		default:
+			std = append(std, line)
+		}
+	}
+	var b strings.Builder
+	b.WriteString("import (\n")
+	for i, group := range [][]string{std, ext, local} {
+		if len(group) == 0 {
+			continue
+		}
+		if i > 0 && b.Len() > len("import (\n") {
+			b.WriteString("\n")
+		}
+		for _, line := range group {
+			b.WriteString(line)
 		}
 	}
 	b.WriteString(")")

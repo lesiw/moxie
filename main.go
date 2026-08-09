@@ -3,7 +3,6 @@ package main
 import (
 	"cmp"
 	_ "embed"
-	"errors"
 	"fmt"
 	"go/types"
 	"os"
@@ -47,7 +46,7 @@ func main() {
 
 func run(args ...string) error {
 	if err := flags.Parse(args...); err != nil {
-		return errors.New("")
+		return fmt.Errorf("")
 	}
 	if *printver {
 		fmt.Println(version)
@@ -55,7 +54,7 @@ func run(args ...string) error {
 	}
 	if len(flags.Args) < 1 {
 		flags.PrintError("bad type: no type provided")
-		return errors.New("")
+		return fmt.Errorf("")
 	}
 	typename = flags.Args[0]
 
@@ -86,7 +85,7 @@ func generate(pkg *types.Package, typ types.Type) error {
 	}
 	st, ok := ntype.Underlying().(*types.Struct)
 	if !ok {
-		return errors.New("type is not a struct")
+		return fmt.Errorf("type is not a struct")
 	}
 	tname := ntype.Obj().Name()
 	fname := "mock_" + snakecase(tname) + "_test.go"
@@ -124,9 +123,7 @@ func generate(pkg *types.Package, typ types.Type) error {
 		}
 		mname, _, _ := strings.Cut(sig, "(")
 		tsig := sel.Obj().Type().(*types.Signature)
-		out.WriteString(
-			fmt.Sprintf(calltype, tname, mname, paramfields(tsig)),
-		)
+		out.WriteString(fmt.Sprintf(calltype, tname, mname, paramfields(tsig)))
 	}
 
 	for sel := range mset.Methods() {

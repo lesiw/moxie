@@ -18,9 +18,7 @@ func raceEnabled() bool {
 var sh = command.Shell(sys.Machine(), "go")
 
 func TestMoxie(t *testing.T) {
-	if err := os.Chdir("internal/testdata/"); err != nil {
-		t.Fatalf("failed to change directory: %s", err)
-	}
+	t.Chdir("internal/testdata/")
 	matches, err := filepath.Glob("mock_*.go")
 	if err != nil {
 		t.Fatalf("failed to match mock files: %s", err)

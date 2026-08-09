@@ -42,8 +42,16 @@ func (T0) NamedParamNoResult(x String)                {}
 func (T0) NamedParamOneResult(x String) error         { return nil }
 func (T0) NamedParamTwoResults(x String) (Int, error) { return 0, nil }
 
-func (T0) NamedMixedNoResult(x String, y ...String)                {}
-func (T0) NamedMixedOneResult(x String, y ...String) error         { return nil }
-func (T0) NamedMixedTwoResults(x String, y ...String) (Int, error) { return 0, nil }
+func (T0) NamedMixedNoResult(x String, y ...String) {}
 
-func (T0) AllNamedIdentifiers(x String, y ...String) (n Int, err error) { return }
+func (T0) NamedMixedOneResult(x String, y ...String) error {
+	return nil
+}
+
+func (T0) NamedMixedTwoResults(x String, y ...String) (Int, error) {
+	return 0, nil
+}
+
+func (T0) AllNamedIdentifiers(x String, y ...String) (n Int, err error) {
+	return
+}

@@ -11,10 +11,7 @@ import (
 )
 
 func raceEnabled() bool {
-	out, err := sh.Read(
-		context.Background(),
-		"go", "env", "CGO_ENABLED",
-	)
+	out, err := sh.Read(context.Background(), "go", "env", "CGO_ENABLED")
 	return err == nil && out == "1"
 }
 

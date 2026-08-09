@@ -110,14 +110,7 @@ func generate(pkg *types.Package, typ types.Type) error {
 		}
 		mname, sig, _ := strings.Cut(sig, "(")
 		sig = "(" + sig
-		out.WriteString(
-			fmt.Sprintf(
-				funcinfo,
-				tname,
-				mname,
-				sig,
-			),
-		)
+		out.WriteString(fmt.Sprintf(funcinfo, tname, mname, sig))
 	}
 	out.WriteString(fmt.Sprintf(headerend, tname))
 
@@ -132,12 +125,7 @@ func generate(pkg *types.Package, typ types.Type) error {
 		mname, _, _ := strings.Cut(sig, "(")
 		tsig := sel.Obj().Type().(*types.Signature)
 		out.WriteString(
-			fmt.Sprintf(
-				calltype,
-				tname,
-				mname,
-				paramfields(tsig),
-			),
+			fmt.Sprintf(calltype, tname, mname, paramfields(tsig)),
 		)
 	}
 
@@ -174,7 +162,8 @@ func generate(pkg *types.Package, typ types.Type) error {
 		)
 	}
 	_, _ = f.WriteString(strings.Replace(out.String(), "import()",
-		importblock(), 1))
+		importblock(), 1,
+	))
 
 	return nil
 }

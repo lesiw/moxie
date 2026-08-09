@@ -6,6 +6,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
+
 	"lesiw.io/moxie/internal/testdata/pkg"
 )
 
@@ -105,7 +106,8 @@ func TestAllCalls(t *testing.T) {
 		opt := cmpopts.EquateComparable(_M0_OneParamNoResult_Call{})
 		if !cmp.Equal(want, got, opt) {
 			t.Errorf("M0._OneParamNoResult_AllCalls():\n%s",
-				cmp.Diff(want, got, opt))
+				cmp.Diff(want, got, opt),
+			)
 		}
 	})
 	if got, want := len(new(M0)._OneParamNoResult_AllCalls()), 0; got != want {
